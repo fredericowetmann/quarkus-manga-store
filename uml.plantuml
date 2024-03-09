@@ -1,0 +1,106 @@
+@startuml
+
+    class Product{
+        - name: String
+        - price: Double
+        - inventory: Integer
+    }
+
+    class Publisher{
+        - name: String
+    }
+
+    class Person{
+        - name: String
+        - cpf: String
+        - email: String
+    }
+
+    class User{
+        - username: String
+        - password: String
+    }
+
+    class Phone{
+        - areaCode: String
+        - number: String
+    }
+
+    class Author{
+        - comic: Comic
+    }
+
+    enum UserType{
+        - ADMIN: int
+        - USER: int
+    }
+
+    class Comic{
+        - name: String
+        - price: float
+        - inventory: int
+        - numPages: Integer
+        - publisher: Publisher
+        - description: String
+        - author: Author
+        - genre: Genre
+    }
+
+    class Genre{
+        - name: String
+        - description: String
+    }
+
+    class Address{
+        - state: State
+        - city: City
+        - zipCode: String
+        - phoneNumber: Phone
+        - address: String
+        - addressComplement: String
+    }
+
+    class Order{
+        - data: LocalDateTime
+        - status: Boolean
+    }
+
+    class ItemOrder{
+        - preco: Double
+        - quantidade: Integer
+    }
+
+    class City{
+        - name: String
+        - state: State
+    }
+
+    class State{
+        - name: String
+        - abreviation: String
+    }
+
+    Order "1" *--> "*" ItemOrder
+    Order "*" --> "1" User
+    ItemOrder "*" --> "1" Comic
+
+    Comic -up-> Product
+    Comic "*" --> "1" Publisher
+    Comic "*" --> "*" Author
+    Comic "1" --> "1" Genre
+
+    User "1" --> "*" Phone
+    User "1" --> "*" Address
+    User "1" --> "1" UserType
+
+    Author -up-> Person
+    User -up-> Person
+
+    Publisher "1" --> "1" Address
+
+    City "*" --> "1" State
+
+    Address "1" --> "1" City
+
+
+@enduml
