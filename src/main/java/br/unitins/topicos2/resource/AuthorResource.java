@@ -36,7 +36,6 @@ public class AuthorResource {
 
     @POST
     @RolesAllowed({"Admin"})
-    @Path("/insert/")
     public Response insert(AuthorDTO dto){
         try{
             LOG.info("Inserindo autor");

@@ -12,7 +12,6 @@ import br.unitins.topicos2.model.Manga;
 import br.unitins.topicos2.repository.MangaRepository;
 // import br.unitins.topicos2.service.MangaFileService;
 import br.unitins.topicos2.service.MangaService;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -51,8 +50,6 @@ public class MangaResource {
     private static final Logger LOG = Logger.getLogger(AuthResource.class);
 
     @POST
-    @Path("/insert")
-    @RolesAllowed({"Admin"})
     public Response insert(MangaDTO dto){
         try{
             LOG.info("Inserindo produto");
@@ -68,7 +65,6 @@ public class MangaResource {
     @PUT
     @Transactional
     @Path("/update/{id}")
-    @RolesAllowed({"Admin"})
     public Response update(@PathParam("id") Long id, MangaDTO dto){
         try{
             LOG.infof("Update em produto de id %s", id);
@@ -120,7 +116,6 @@ public class MangaResource {
     @DELETE
     @Transactional
     @Path("/delete/{id}")
-    @RolesAllowed({"Admin"})
     public Response delete(@PathParam("id") Long id){
         try{
             LOG.info("Deletando o produto");
@@ -150,7 +145,6 @@ public class MangaResource {
 
     @GET
     @Path("/search/id/{id}")
-    @RolesAllowed({"Admin", "User"})
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando produto de id %s", id); 

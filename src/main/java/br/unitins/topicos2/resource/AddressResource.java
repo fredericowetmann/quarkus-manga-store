@@ -36,7 +36,6 @@ public class AddressResource {
     private static final Logger LOG = Logger.getLogger(AuthResource.class);
 
     @POST
-    @Path("/insert/")
     public Response insert(AddressDTO dto){
 
         try{

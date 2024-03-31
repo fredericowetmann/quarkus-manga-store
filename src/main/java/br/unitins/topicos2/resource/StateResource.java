@@ -4,7 +4,6 @@ import org.jboss.logging.Logger;
 import br.unitins.topicos2.dto.StateDTO;
 import br.unitins.topicos2.dto.StateResponseDTO;
 import br.unitins.topicos2.service.StateService;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
