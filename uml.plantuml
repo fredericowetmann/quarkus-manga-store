@@ -1,0 +1,136 @@
+@startuml
+
+    class Publisher{
+        - name: String
+    }
+
+    class Person{
+        - name: String
+        - cpf: String
+        - email: String
+    }
+
+    class User{
+        - username: String
+        - password: String
+    }
+
+    class Phone{
+        - areaCode: String
+        - number: String
+    }
+
+    class Author{
+        - name: String
+    }
+
+    enum UserType{
+        - ADMIN: int
+        - USER: int
+    }
+
+    class Manga{
+        - name: String
+        - description: String
+        - price: float
+        - inventory: int
+        - numPages: Integer
+        - volume: Integer
+        - publisher: Publisher
+        - author: Author
+        - genre: Genre
+    }
+
+    class Collection{
+        - name: String
+        - description: String
+    }
+
+    class Genre{
+        - name: String
+        - description: String
+    }
+
+    class Address{
+        - addressName: String
+        - address: String
+        - addressComplement: String
+        - zipCode: String
+        - city: City
+    }
+
+    class Order{
+        - data: LocalDateTime
+        - status: Boolean
+    }
+
+    class ItemOrder{
+        - preco: Double
+        - quantidade: Integer
+    }
+
+    class City{
+        - name: String
+        - state: State
+    }
+
+    class State{
+        - name: String
+        - abreviation: String
+    }
+
+    class Payment{
+        - isBrought: Bollean
+        - dateTimePayment: LocalDateTime
+        - pix: Pix
+        - debitCard: DebitCard
+    }
+
+    class Pix{
+        -  keyPix: String
+        - expirationDate: LocalDateTime
+    }
+
+    class CreditCard{
+        - cardNumber: int
+        - impressedCardName: String
+        - cpfOwner: String
+        - cardBrand: CardBrand
+    }
+
+    enum CardBrand{
+        - VISA: int
+        - AMERICAN_EXPRESS: int
+        - HIPERCARD: int
+        - DINERS: int
+        - MASTERCARD: int
+        - ELO: int
+    }
+
+    Order "1" *--> "*" ItemOrder
+    Order "*" --> "1" User
+    ItemOrder "*" --> "1" Manga
+
+    Manga "*" --> "1" Publisher
+    Manga "*" --> "*" Author
+    Manga "1" --> "*" Genre
+    Manga "1" --> Collection
+
+    User "1" *--> "*" Phone
+    User "1" *--> "*" Address
+    User "1" --> "1" UserType
+
+    User --> Person
+
+    Publisher "1" --> "1" Address
+
+    City "*" --> "1" State
+
+    Address "1" --> "1" City
+
+    Payment --> Order
+    Pix -right-> Payment
+    CreditCard -left-> Payment
+    CardBrand -up-> CreditCard
+
+@enduml
