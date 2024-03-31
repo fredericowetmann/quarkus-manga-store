@@ -48,8 +48,8 @@ public class MangaServiceImpl implements MangaService{
         
         
 
-        manga.setPublisher(publisherRepository.findById(dto.publisher()));
-        manga.setAuthor(authorRepository.findById(dto.author()));
+        // manga.setPublisher(publisherRepository.findById(dto.publisher()));
+        // manga.setAuthor(authorRepository.findById(dto.author()));
 
         repository.persist(manga);
 
@@ -73,8 +73,8 @@ public class MangaServiceImpl implements MangaService{
         manga.setNumPages(dto.numPages());
         manga.setVolume(dto.volume());
         
-        manga.setPublisher(publisherRepository.findById(dto.publisher()));
-        manga.setAuthor(authorRepository.findById(dto.author()));
+        // manga.setPublisher(publisherRepository.findById(dto.publisher()));
+        // manga.setAuthor(authorRepository.findById(dto.author()));
 
         return MangaResponseDTO.valueOf(manga);
     }

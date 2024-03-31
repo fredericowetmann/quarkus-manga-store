@@ -13,9 +13,9 @@ public record MangaDTO (
     @NotNull(message = "A quantidade em estoque não pode estar nula")
     Integer inventory,
     Integer numPages,
-    Integer volume,
-    Long publisher,
-    Long author
+    Integer volume
+    // Long publisher,
+    // Long author
 ){
 
 }
