@@ -48,7 +48,7 @@ public class AuthorResource {
 
     @PUT
     @Transactional
-    @Path("/update/{id}")
+    @Path("/{id}")
     public Response update(@PathParam("id") Long id, AuthorDTO dto){
         try{
             LOG.info("Atualizando os dados do autor");
@@ -63,7 +63,7 @@ public class AuthorResource {
 
     @DELETE
     @Transactional
-    @Path("/delete/{id}")
+    @Path("/{id}")
     public Response delete(@PathParam("id") Long id){
         try{
             LOG.infof("Deletando autor de id %s", id);

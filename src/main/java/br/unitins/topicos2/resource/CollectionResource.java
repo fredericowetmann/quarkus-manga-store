@@ -48,7 +48,7 @@ public class CollectionResource {
 
     @PUT
     @Transactional
-    @Path("/update/{id}")
+    @Path("/{id}")
     public Response update(@PathParam("id") Long id, CollectionDTO dto){
         try{
             LOG.info("Atualizando os dados da coleção");
@@ -63,7 +63,7 @@ public class CollectionResource {
 
     @DELETE
     @Transactional
-    @Path("/delete/{id}")
+    @Path("/{id}")
     public Response delete(@PathParam("id") Long id){
         try{
             LOG.infof("Deletando coleção de id %s", id);

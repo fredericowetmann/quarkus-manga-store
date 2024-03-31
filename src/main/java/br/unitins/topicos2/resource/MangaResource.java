@@ -64,7 +64,7 @@ public class MangaResource {
 
     @PUT
     @Transactional
-    @Path("/update/{id}")
+    @Path("/{id}")
     public Response update(@PathParam("id") Long id, MangaDTO dto){
         try{
             LOG.infof("Update em produto de id %s", id);
@@ -115,7 +115,7 @@ public class MangaResource {
 
     @DELETE
     @Transactional
-    @Path("/delete/{id}")
+    @Path("/{id}")
     public Response delete(@PathParam("id") Long id){
         try{
             LOG.info("Deletando o produto");
@@ -144,7 +144,7 @@ public class MangaResource {
     }
 
     @GET
-    @Path("/search/id/{id}")
+    @Path("/{id}")
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando produto de id %s", id); 

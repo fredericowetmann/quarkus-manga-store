@@ -51,7 +51,7 @@ public class AddressResource {
 
     @PUT
     @Transactional
-    @Path("/update/{idAddress}")
+    @Path("/{idAddress}")
     public Response update(@PathParam("idAddress") Long idAddress, AddressDTO dto){
 
         try{
@@ -73,7 +73,7 @@ public class AddressResource {
 
     @DELETE
     @Transactional
-    @Path("/delete/{id}")
+    @Path("/{id}")
     public Response delete(@PathParam("id") Long idAddress){
         try{
             LOG.infof("Deletando endereço de id %s", idAddress);
