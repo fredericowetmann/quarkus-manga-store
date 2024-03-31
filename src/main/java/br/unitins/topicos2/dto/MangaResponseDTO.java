@@ -2,7 +2,7 @@ package br.unitins.topicos2.dto;
 
 import br.unitins.topicos2.model.Author;
 import br.unitins.topicos2.model.Manga;
-//import br.unitins.topicos2.model.Publisher;
+import br.unitins.topicos2.model.Publisher;
 
 public record MangaResponseDTO (
     Long id,
@@ -12,12 +12,12 @@ public record MangaResponseDTO (
     Integer inventory,
     Integer numPages,
     Integer volume,
-//    Publisher publisher,
+    Publisher publisher,
     Author author
 //    String imageName
 ){
     public static MangaResponseDTO valueOf(Manga manga){
-        return new MangaResponseDTO(manga.getId(), manga.getName(), manga.getDescription(), manga.getPrice(), manga.getInventory(), manga.getNumPages(), manga.getVolume(), manga.getAuthor());
+        return new MangaResponseDTO(manga.getId(), manga.getName(), manga.getDescription(), manga.getPrice(), manga.getInventory(), manga.getNumPages(), manga.getVolume(), manga.getPublisher(), manga.getAuthor());
     }
     
 }

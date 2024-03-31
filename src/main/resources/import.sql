@@ -30,20 +30,25 @@ insert into user_phone (id_user, id_phone) values(1, 2);
 insert into user_phone (id_user, id_phone) values(2, 3);
 insert into user_phone (id_user, id_phone) values(2, 4);
 
-insert into address_table(`name`, postalCode, `address`, complement, id_city) values('Casa', '0000000', 'Avenida 5 casa 5', 'Em frente ao bar do zé', 1);
-insert into address_table(`name`, postalCode, `address`, complement, id_city) values('Trabalho', '11111111', 'Rua almeida, predio 12', 'sede tal', 1);
-insert into address_table(`name`, postalCode, `address`, complement, id_city) values('Casa', '55555440', 'Avenida santa hora ap 22b', 'condominio tal', 1);
+insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Casa', '0000000', 'Avenida 5 casa 5', 'Em frente ao bar do zé', 1);
+insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Trabalho', '11111111', 'Rua almeida, predio 12', 'sede tal', 1);
+insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Casa', '55555440', 'Avenida santa hora ap 22b', 'condominio tal', 1);
 
-insert into mangas(`name`, `description`, price, inventory, numPages, volume, id_author) values('Manga teste 1', 'Descrição foda', 60, 100, 200, 10, 1);
-insert into mangas(`name`, `description`, price, inventory, numPages, volume, id_author) values('Manga teste 2', 'Descrição foda', 60, 50, 300, 18, 1);
-insert into mangas(`name`, `description`, price, inventory, numPages, volume, id_author) values('Manga teste 3', 'Descrição foda', 60, 50, 300, 20, 1);
-insert into mangas(`name`, `description`, price, inventory, numPages, volume, id_author) values('Manga teste 4', 'Descrição foda', 60, 50, 300, 32, 1);
-insert into mangas(`name`, `description`, price, inventory, numPages, volume, id_author) values('Manga teste 5', 'Descrição foda', 60, 50, 300, 31, 1);
+insert into manga (`name`, `description`, price, inventory, numPages, volume) values('Manga teste 1', 'Descrição foda', 60, 100, 200, 10);
+insert into manga (`name`, `description`, price, inventory, numPages, volume) values('Manga teste 2', 'Descrição foda', 60, 50, 300, 18);
+insert into manga (`name`, `description`, price, inventory, numPages, volume) values('Manga teste 3', 'Descrição foda', 60, 50, 300, 20);
+insert into manga (`name`, `description`, price, inventory, numPages, volume) values('Manga teste 4', 'Descrição foda', 60, 50, 300, 32);
+insert into manga (`name`, `description`, price, inventory, numPages, volume) values('Manga teste 5', 'Descrição foda', 60, 50, 300, 31);
 
-insert into genre_table (`name`, `description`) values('Hentai', 'SSEEEEGGGGGs UOOHHH');
-insert into genre_table (`name`, `description`) values('Aventura', 'Aventura pika loca');
-insert into genre_table (`name`, `description`) values('Ação', 'Ação ação');
-insert into genre_table (`name`, `description`) values('Isekai', 'Aventuras de outro mundo');
+insert into author (`name`) values('Frederic Vertman');
+insert into author (`name`) values('Jonathas Antones');
+insert into author (`name`) values('Autor Generico');
+insert into author (`name`) values('Sei lá');
+
+insert into genre (`name`, `description`) values('Hentai', 'SSEEEEGGGGGs UOOHHH');
+insert into genre (`name`, `description`) values('Aventura', 'Aventura pika loca');
+insert into genre (`name`, `description`) values('Ação', 'Ação ação');
+insert into genre (`name`, `description`) values('Isekai', 'Aventuras de outro mundo');
 
 insert into collections (`name`, `description`) values('Blue Archive', 'CUUNNNNNYYYY UOOHHH');
 insert into collections (`name`, `description`) values('Dragon Bolas', 'Aventura pika loca');
@@ -54,6 +59,3 @@ insert into publisher (`name`) values('Panini');
 insert into publisher (`name`) values('Jbc');
 insert into publisher (`name`) values('New pop');
 insert into publisher (`name`) values('Square Enix');
-
-insert into author_table (`name`) values('Frederic Vertman');
-insert into author_table (`name`) values('Jonathas Antones');

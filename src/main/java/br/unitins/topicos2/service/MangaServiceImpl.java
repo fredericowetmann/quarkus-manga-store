@@ -11,7 +11,7 @@ import br.unitins.topicos2.model.Manga;
 import br.unitins.topicos2.model.User;
 import br.unitins.topicos2.repository.AuthorRepository;
 import br.unitins.topicos2.repository.MangaRepository;
-// import br.unitins.topicos2.repository.PublisherRepository;
+import br.unitins.topicos2.repository.PublisherRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -23,8 +23,8 @@ public class MangaServiceImpl implements MangaService{
     @Inject
     MangaRepository repository;
 
-    // @Inject
-    // PublisherRepository publisherRepository;
+    @Inject
+    PublisherRepository publisherRepository;
 
      @Inject
      AuthorRepository authorRepository;
@@ -46,7 +46,7 @@ public class MangaServiceImpl implements MangaService{
         
         
 
-        // manga.setPublisher(publisherRepository.findById(dto.publisher()));
+        manga.setPublisher(publisherRepository.findById(dto.publisher()));
         manga.setAuthor(authorRepository.findById(dto.author()));
 
         repository.persist(manga);
@@ -71,7 +71,7 @@ public class MangaServiceImpl implements MangaService{
         manga.setNumPages(dto.numPages());
         manga.setVolume(dto.volume());
         
-        // manga.setPublisher(publisherRepository.findById(dto.publisher()));
+        manga.setPublisher(publisherRepository.findById(dto.publisher()));
         manga.setAuthor(authorRepository.findById(dto.author()));
 
         return MangaResponseDTO.valueOf(manga);
