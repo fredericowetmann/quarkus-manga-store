@@ -38,7 +38,7 @@ public class AddressResource {
 
     @POST
     @Path("/insert/")
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"Admin", "User"})
     public Response insert(AddressDTO dto){
 
         try{
@@ -55,7 +55,7 @@ public class AddressResource {
     @PUT
     @Transactional
     @Path("/update/{idAddress}")
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"Admin", "User"})
     public Response update(@PathParam("idAddress") Long idAddress, AddressDTO dto){
 
         try{
@@ -78,7 +78,7 @@ public class AddressResource {
     @DELETE
     @Transactional
     @Path("/delete/{id}")
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"Admin", "User"})
     public Response delete(@PathParam("id") Long idAddress){
         try{
             LOG.infof("Deletando endereço de id %s", idAddress);
@@ -94,7 +94,7 @@ public class AddressResource {
 
     @GET
     @Path("/search/id/{id}")
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"Admin", "User"})
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando por endereço de id %s", id);
