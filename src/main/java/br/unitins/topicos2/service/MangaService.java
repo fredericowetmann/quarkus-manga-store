@@ -16,7 +16,7 @@ public interface MangaService {
 
     public void delete(Long id);
 
-    public List<MangaResponseDTO> findAll();
+    public List<MangaResponseDTO> getAll(int page, int pageSize);
 
     public List<MangaResponseDTO> findByName(String name);
 

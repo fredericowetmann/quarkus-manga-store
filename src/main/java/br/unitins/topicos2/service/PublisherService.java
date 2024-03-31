@@ -16,5 +16,5 @@ public interface PublisherService {
 
     public List<PublisherResponseDTO> findByName(String name);
 
-    public List<PublisherResponseDTO> findAll();
+    public List<PublisherResponseDTO> getAll(int page, int pageSize);
 }

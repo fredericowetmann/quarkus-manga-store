@@ -16,6 +16,6 @@ public interface GenreService {
 
     public List<GenreResponseDTO> findByName(String name);
 
-    public List<GenreResponseDTO> findAll();
+    public List<GenreResponseDTO> getAll(int page, int pageSize);
     
 }

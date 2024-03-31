@@ -1,6 +1,7 @@
 package br.unitins.topicos2.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.unitins.topicos2.dto.AuthorDTO;
 import br.unitins.topicos2.dto.AuthorResponseDTO;
@@ -67,11 +68,15 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorResponseDTO> findAll() {
+    public List<AuthorResponseDTO> getAll(int page, int pageSize) {
+        List<Author> list = repository
+                                .findAll()
+                                .page(page, pageSize)
+                                .list();
         if(repository.listAll().stream().map(e -> AuthorResponseDTO.valueOf(e)).toList().isEmpty()){
             throw new NotFoundException("Não há autores");
         }
-        return repository.listAll().stream().map(e -> AuthorResponseDTO.valueOf(e)).toList();
-    }
+        return list.stream().map(e -> AuthorResponseDTO.valueOf(e)).collect(Collectors.toList());
+    }  
     
 }

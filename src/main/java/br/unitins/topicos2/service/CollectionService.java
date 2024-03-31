@@ -16,6 +16,6 @@ public interface CollectionService {
 
     public List<CollectionResponseDTO> findByName(String name);
 
-    public List<CollectionResponseDTO> findAll();
+    public List<CollectionResponseDTO> getAll(int page, int pageSize);
     
 }

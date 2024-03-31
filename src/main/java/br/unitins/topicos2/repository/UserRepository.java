@@ -1,16 +1,18 @@
 package br.unitins.topicos2.repository;
 
-import java.util.List;
-
 import br.unitins.topicos2.model.User;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.NoResultException;
 
 @ApplicationScoped
 public class UserRepository implements PanacheRepository<User>{
-    public List<User> findByName(String name) {
-        return find("UPPER(name) LIKE UPPER(?1) ", "%"+name+"%").list();
+    
+    public PanacheQuery<User> findByName(String name) {
+        if (name == null)
+            return null;
+        return find("UPPER(name) LIKE ?1 ", "%" + name.toUpperCase() + "%");
     }
 
     public User findByLogin(String login) {

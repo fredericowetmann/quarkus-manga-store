@@ -8,7 +8,7 @@ import br.unitins.topicos2.dto.CityResponseDTO;
 public interface CityService {
 
         // recursos basicos
-        List<CityResponseDTO> getAll();
+        public List<CityResponseDTO> getAll(int page, int pageSize);
 
         CityResponseDTO findById(Long id);
     

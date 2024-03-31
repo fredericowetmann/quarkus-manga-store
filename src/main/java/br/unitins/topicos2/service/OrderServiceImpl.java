@@ -3,6 +3,7 @@ package br.unitins.topicos2.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.unitins.topicos2.dto.ItemOrderDTO;
 import br.unitins.topicos2.dto.OrderDTO;
@@ -166,10 +167,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderResponseDTO> findByAll() {
-        return orderRepository.listAll().stream()
-            .map(e -> OrderResponseDTO.valueOf(e)).toList();
-    }
+    public List<OrderResponseDTO> getAll(int page, int pageSize) {
+        List<Order> list = orderRepository
+                                .findAll()
+                                .page(page, pageSize)
+                                .list();
+        
+        return list.stream().map(e -> OrderResponseDTO.valueOf(e)).collect(Collectors.toList());
+    }  
 
     @Override
     public List<OrderResponseDTO> findByAll(String login) {

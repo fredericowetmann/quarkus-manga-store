@@ -1,10 +1,13 @@
 package br.unitins.topicos2.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.unitins.topicos2.dto.PublisherDTO;
 import br.unitins.topicos2.dto.PublisherResponseDTO;
+import br.unitins.topicos2.dto.StateResponseDTO;
 import br.unitins.topicos2.model.Publisher;
+import br.unitins.topicos2.model.State;
 import br.unitins.topicos2.repository.PublisherRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -68,12 +71,15 @@ public class PublisherServiceImpl implements PublisherService{
     }
 
     @Override
-    public List<PublisherResponseDTO> findAll() {
-
+    public List<PublisherResponseDTO> getAll(int page, int pageSize) {
+        List<Publisher> list = repository
+                                .findAll()
+                                .page(page, pageSize)
+                                .list();
         if(repository.listAll().stream().map(e -> PublisherResponseDTO.valueOf(e)).toList().isEmpty()) {
             throw new NotFoundException("Publisher não encontrada");
-        }
-        return repository.listAll().stream().map(e -> PublisherResponseDTO.valueOf(e)).toList();
-    }
+            }
+        return list.stream().map(e -> PublisherResponseDTO.valueOf(e)).collect(Collectors.toList());
+    }  
     
 }

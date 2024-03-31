@@ -1,6 +1,7 @@
 package br.unitins.topicos2.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.unitins.topicos2.dto.GenreDTO;
 import br.unitins.topicos2.dto.GenreResponseDTO;
@@ -69,11 +70,15 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public List<GenreResponseDTO> findAll() {
+    public List<GenreResponseDTO> getAll(int page, int pageSize) {
+        List<Genre> list = repository
+                                .findAll()
+                                .page(page, pageSize)
+                                .list();
         if(repository.listAll().stream().map(e -> GenreResponseDTO.valueOf(e)).toList().isEmpty()){
             throw new NotFoundException("Não há generos");
         }
-        return repository.listAll().stream().map(e -> GenreResponseDTO.valueOf(e)).toList();
-    }
+        return list.stream().map(e -> GenreResponseDTO.valueOf(e)).collect(Collectors.toList());
+    }  
     
 }

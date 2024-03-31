@@ -9,6 +9,6 @@ public interface OrderService {
 
         public OrderResponseDTO insert(OrderDTO dto, String login);
         public OrderResponseDTO findById(Long id);
-        public List<OrderResponseDTO> findByAll();
+        public List<OrderResponseDTO> getAll(int page, int pageSize);
         public List<OrderResponseDTO> findByAll(String login);
 }

@@ -30,10 +30,14 @@ public class CityServiceImpl implements CityService {
     Validator validator;
 
     @Override
-    public List<CityResponseDTO> getAll() {
-        List<City> list = cityRepository.findAll2();
+    public List<CityResponseDTO> getAll(int page, int pageSize) {
+        List<City> list = cityRepository
+                                .findAll()
+                                .page(page, pageSize)
+                                .list();
+        
         return list.stream().map(e -> CityResponseDTO.valueOf(e)).collect(Collectors.toList());
-    }
+    }  
 
     @Override
     public CityResponseDTO findById(Long id) {
@@ -85,7 +89,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<CityResponseDTO> findByName(String name) {
-        List<City> list = cityRepository.findByName(name);
+        List<City> list = cityRepository.findByName(name).list();
         return list.stream().map(e -> CityResponseDTO.valueOf(e)).collect(Collectors.toList());
     }
 

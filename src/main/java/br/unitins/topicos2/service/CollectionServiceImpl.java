@@ -1,6 +1,7 @@
 package br.unitins.topicos2.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.unitins.topicos2.dto.CollectionDTO;
 import br.unitins.topicos2.dto.CollectionResponseDTO;
@@ -69,11 +70,15 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
-    public List<CollectionResponseDTO> findAll() {
+    public List<CollectionResponseDTO> getAll(int page, int pageSize) {
+        List<Collection> list = repository
+                                .findAll()
+                                .page(page, pageSize)
+                                .list();
         if(repository.listAll().stream().map(e -> CollectionResponseDTO.valueOf(e)).toList().isEmpty()){
             throw new NotFoundException("Não há Coleções");
-        }
-        return repository.listAll().stream().map(e -> CollectionResponseDTO.valueOf(e)).toList();
-    }
-    
+        }    
+        return list.stream().map(e -> CollectionResponseDTO.valueOf(e)).collect(Collectors.toList());
+    }  
+
 }

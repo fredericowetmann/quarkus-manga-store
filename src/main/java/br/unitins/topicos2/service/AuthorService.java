@@ -16,6 +16,6 @@ public interface AuthorService {
 
     public List<AuthorResponseDTO> findByName(String name);
 
-    public List<AuthorResponseDTO> findAll();
+    public List<AuthorResponseDTO> getAll(int page, int pageSize);
     
 }

@@ -2,10 +2,12 @@ package br.unitins.topicos2.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.unitins.topicos2.dto.AuthorResponseDTO;
 import br.unitins.topicos2.dto.MangaDTO;
 import br.unitins.topicos2.dto.MangaResponseDTO;
+import br.unitins.topicos2.dto.StateResponseDTO;
 // import br.unitins.topicos2.form.MangaImageForm;
 import br.unitins.topicos2.model.Manga;
 import br.unitins.topicos2.model.User;
@@ -99,13 +101,17 @@ public class MangaServiceImpl implements MangaService{
     }
 
     @Override
-    public List<MangaResponseDTO> findAll() {
+    public List<MangaResponseDTO> getAll(int page, int pageSize) {
+        List<Manga> list = repository
+                                .findAll()
+                                .page(page, pageSize)
+                                .list();
         if(repository.listAll().stream().map(e -> MangaResponseDTO.valueOf(e)).toList().isEmpty()){
             throw new NotFoundException("Nenhum produto para ser encontrado");
         }
-
-        return repository.listAll().stream().map(e -> MangaResponseDTO.valueOf(e)).toList();
-    }
+        
+        return list.stream().map(e -> MangaResponseDTO.valueOf(e)).collect(Collectors.toList());
+    }  
 
     @Override
     public MangaResponseDTO findById(Long id) {
