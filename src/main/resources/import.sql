@@ -34,12 +34,6 @@ insert into address_table (`name`, postalCode, `address`, complement, id_city) v
 insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Trabalho', '11111111', 'Rua almeida, predio 12', 'sede tal', 1);
 insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Casa', '55555440', 'Avenida santa hora ap 22b', 'condominio tal', 1);
 
-insert into manga (`name`, `description`, price, inventory, numPages, volume) values('Manga teste 1', 'Descrição foda', 60, 100, 200, 10);
-insert into manga (`name`, `description`, price, inventory, numPages, volume) values('Manga teste 2', 'Descrição foda', 60, 50, 300, 18);
-insert into manga (`name`, `description`, price, inventory, numPages, volume) values('Manga teste 3', 'Descrição foda', 60, 50, 300, 20);
-insert into manga (`name`, `description`, price, inventory, numPages, volume) values('Manga teste 4', 'Descrição foda', 60, 50, 300, 32);
-insert into manga (`name`, `description`, price, inventory, numPages, volume) values('Manga teste 5', 'Descrição foda', 60, 50, 300, 31);
-
 insert into author (`name`) values('Frederic Vertman');
 insert into author (`name`) values('Jonathas Antones');
 insert into author (`name`) values('Autor Generico');
@@ -59,3 +53,9 @@ insert into publisher (`name`) values('Panini');
 insert into publisher (`name`) values('Jbc');
 insert into publisher (`name`) values('New pop');
 insert into publisher (`name`) values('Square Enix');
+
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_author) values('Manga teste 1', 'Descrição foda', 60, 100, 200, 10, 1);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_author) values('Manga teste 2', 'Descrição foda', 60, 50, 300, 18, 1);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_author) values('Manga teste 3', 'Descrição foda', 60, 50, 300, 20, 2);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_author) values('Manga teste 4', 'Descrição foda', 60, 50, 300, 32, 3);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_author) values('Manga teste 5', 'Descrição foda', 60, 50, 300, 31, 4);

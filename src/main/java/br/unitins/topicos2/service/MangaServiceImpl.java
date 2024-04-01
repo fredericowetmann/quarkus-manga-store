@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.unitins.topicos2.dto.AddressResponseDTO;
 import br.unitins.topicos2.dto.AuthorResponseDTO;
 import br.unitins.topicos2.dto.MangaDTO;
 import br.unitins.topicos2.dto.MangaResponseDTO;
@@ -49,7 +50,7 @@ public class MangaServiceImpl implements MangaService{
         
 
         // manga.setPublisher(publisherRepository.findById(dto.publisher()));
-        // manga.setAuthor(authorRepository.findById(dto.author()));
+        manga.setAuthor(authorRepository.findById(dto.author()));
 
         repository.persist(manga);
 
@@ -74,7 +75,7 @@ public class MangaServiceImpl implements MangaService{
         manga.setVolume(dto.volume());
         
         // manga.setPublisher(publisherRepository.findById(dto.publisher()));
-        // manga.setAuthor(authorRepository.findById(dto.author()));
+        manga.setAuthor(authorRepository.findById(dto.author()));
 
         return MangaResponseDTO.valueOf(manga);
     }
@@ -135,11 +136,11 @@ public class MangaServiceImpl implements MangaService{
     @Override
     public List<MangaResponseDTO> findByAuthor(String authorName) {
 
-        if(authorRepository.findByName(authorName).stream().map(e -> AuthorResponseDTO.valueOf(e)).toList().isEmpty()){
+        if(repository.findByAuthor(authorName).stream().map(e -> MangaResponseDTO.valueOf(e)).toList().isEmpty()){
             throw new NotFoundException("Nenhum produto encontrado");
         }
 
-        return repository.findByName(authorName).stream().map(e -> MangaResponseDTO.valueOf(e)).toList();
+        return repository.findByAuthor(authorName).stream().map(e -> MangaResponseDTO.valueOf(e)).toList();
     }
 
 }

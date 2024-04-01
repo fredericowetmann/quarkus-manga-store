@@ -90,7 +90,7 @@ public class GenreResource {
     }
 
     @GET
-    @Path("/search/id/{id}")
+    @Path("/{id}")
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando por genero de id %s", id);

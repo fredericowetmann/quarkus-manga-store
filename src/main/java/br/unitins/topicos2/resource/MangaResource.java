@@ -173,7 +173,7 @@ public class MangaResource {
     }
 
     @GET
-    @Path("/search/authorName/{name}")
+    @Path("/search/authorName/{authorName}")
     public Response findByAuthor(@PathParam("authorName") String authorName){
 
         try{

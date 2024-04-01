@@ -11,13 +11,13 @@ public record MangaResponseDTO (
     Double price,
     Integer inventory,
     Integer numPages,
-    Integer volume
+    Integer volume,
     // Publisher publisher,
-    // Author author
+    Author author
 //    String imageName
 ){
     public static MangaResponseDTO valueOf(Manga manga){
-        return new MangaResponseDTO(manga.getId(), manga.getName(), manga.getDescription(), manga.getPrice(), manga.getInventory(), manga.getNumPages(), manga.getVolume());
+        return new MangaResponseDTO(manga.getId(), manga.getName(), manga.getDescription(), manga.getPrice(), manga.getInventory(), manga.getNumPages(), manga.getVolume(), manga.getAuthor());
     }
     
 }

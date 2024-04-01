@@ -8,10 +8,15 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class MangaRepository implements PanacheRepository<Manga>{
-    
     public PanacheQuery<Manga> findByName(String name) {
         if (name == null)
             return null;
         return find("UPPER(name) LIKE ?1 ", "%" + name.toUpperCase() + "%");
+    }
+
+    public PanacheQuery<Manga> findByAuthor(String name) {
+        if (name == null)
+            return null;
+        return find("UPPER(author.name) LIKE ?1 ", "%" + name.toUpperCase() + "%");
     }
 }
