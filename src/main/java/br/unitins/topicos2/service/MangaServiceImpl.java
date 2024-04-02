@@ -10,6 +10,7 @@ import br.unitins.topicos2.dto.MangaResponseDTO;
 import br.unitins.topicos2.model.Manga;
 import br.unitins.topicos2.model.User;
 import br.unitins.topicos2.repository.AuthorRepository;
+import br.unitins.topicos2.repository.CollectionRepository;
 import br.unitins.topicos2.repository.MangaRepository;
 import br.unitins.topicos2.repository.PublisherRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -25,6 +26,9 @@ public class MangaServiceImpl implements MangaService{
 
     @Inject
     PublisherRepository publisherRepository;
+
+    @Inject
+    CollectionRepository collectionRepository;
 
      @Inject
      AuthorRepository authorRepository;
@@ -44,6 +48,7 @@ public class MangaServiceImpl implements MangaService{
         manga.setNumPages(dto.numPages());
         manga.setVolume(dto.volume());
 
+        manga.setCollection(collectionRepository.findById(dto.collection()));
         manga.setPublisher(publisherRepository.findById(dto.publisher()));
         manga.setAuthor(authorRepository.findById(dto.author()));
 
@@ -69,6 +74,7 @@ public class MangaServiceImpl implements MangaService{
         manga.setNumPages(dto.numPages());
         manga.setVolume(dto.volume());
         
+        manga.setCollection(collectionRepository.findById(dto.collection()));
         manga.setPublisher(publisherRepository.findById(dto.publisher()));
         manga.setAuthor(authorRepository.findById(dto.author()));
 
@@ -146,6 +152,16 @@ public class MangaServiceImpl implements MangaService{
         }
 
         return repository.findByPublisher(publisherName).stream().map(e -> MangaResponseDTO.valueOf(e)).toList();
+    }
+
+    @Override
+    public List<MangaResponseDTO> findByCollection(String collectionName) {
+
+        if(repository.findByCollection(collectionName).stream().map(e -> MangaResponseDTO.valueOf(e)).toList().isEmpty()){
+            throw new NotFoundException("Nenhum produto encontrado");
+        }
+
+        return repository.findByCollection(collectionName).stream().map(e -> MangaResponseDTO.valueOf(e)).toList();
     }
 
 }

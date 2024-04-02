@@ -21,6 +21,10 @@ public class Manga extends DefaultEntity{
     private Integer inventory;
 
     @ManyToOne
+    @JoinColumn(name = "id_collection")
+    private Collection collection;
+
+    @ManyToOne
     @JoinColumn(name = "id_publisher")
     private Publisher publisher;
 
@@ -76,6 +80,14 @@ public class Manga extends DefaultEntity{
 
     public void setVolume(Integer volume) {
         this.volume = volume;
+    }
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
     }
 
     public Publisher getPublisher() {

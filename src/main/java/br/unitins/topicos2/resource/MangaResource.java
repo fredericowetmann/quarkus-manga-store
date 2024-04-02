@@ -201,4 +201,19 @@ public class MangaResource {
             return Response.status(Status.NOT_FOUND).entity(error).build();
         }
     }
+
+    @GET
+    @Path("/search/collectionName/{collectionName}")
+    public Response findByCollection(@PathParam("collectionName") String collectionName){
+
+        try{
+            LOG.infof("Buscando por %s", collectionName);
+            return Response.ok(service.findByCollection(collectionName)).build();
+        } catch(NotFoundException e){
+            LOG.info("Produto não encontrado");
+            Error error = new Error("404", e.getMessage());
+            
+            return Response.status(Status.NOT_FOUND).entity(error).build();
+        }
+    }
 }

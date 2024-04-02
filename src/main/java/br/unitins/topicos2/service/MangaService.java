@@ -25,5 +25,7 @@ public interface MangaService {
     public List<MangaResponseDTO> findByAuthor(String authorName);
 
     public List<MangaResponseDTO> findByPublisher(String publisherName);
+
+    public List<MangaResponseDTO> findByCollection(String collectionName);
     
 }

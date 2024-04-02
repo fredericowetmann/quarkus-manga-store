@@ -54,8 +54,8 @@ insert into publisher (`name`) values('Jbc');
 insert into publisher (`name`) values('New pop');
 insert into publisher (`name`) values('Square Enix');
 
-insert into manga (`name`, `description`, price, inventory, numPages, volume, id_publisher, id_author) values('Manga teste 1', 'Descrição foda', 60, 100, 200, 10, 1, 1);
-insert into manga (`name`, `description`, price, inventory, numPages, volume, id_publisher, id_author) values('Manga teste 2', 'Descrição foda', 60, 50, 300, 18, 1, 1);
-insert into manga (`name`, `description`, price, inventory, numPages, volume, id_publisher, id_author) values('Manga teste 3', 'Descrição foda', 60, 50, 300, 20, 2, 2);
-insert into manga (`name`, `description`, price, inventory, numPages, volume, id_publisher, id_author) values('Manga teste 4', 'Descrição foda', 60, 50, 300, 32, 3, 3);
-insert into manga (`name`, `description`, price, inventory, numPages, volume, id_publisher, id_author) values('Manga teste 5', 'Descrição foda', 60, 50, 300, 31, 4, 4);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 1', 'Descrição foda', 60, 100, 200, 10, 1, 1, 1);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 2', 'Descrição foda', 60, 50, 300, 18, 1, 1, 1);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 3', 'Descrição foda', 60, 50, 300, 20, 2, 2, 2);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 4', 'Descrição foda', 60, 50, 300, 32, 3, 3, 3);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 5', 'Descrição foda', 60, 50, 300, 31, 4, 4, 4);

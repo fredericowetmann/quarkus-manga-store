@@ -25,4 +25,10 @@ public class MangaRepository implements PanacheRepository<Manga>{
             return null;
         return find("UPPER(publisher.name) LIKE ?1 ", "%" + name.toUpperCase() + "%");
     }
+
+    public PanacheQuery<Manga> findByCollection(String name) {
+        if (name == null)
+            return null;
+        return find("UPPER(collection.name) LIKE ?1 ", "%" + name.toUpperCase() + "%");
+    }
 }
