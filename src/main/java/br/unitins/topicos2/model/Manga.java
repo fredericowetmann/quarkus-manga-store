@@ -21,6 +21,7 @@ public class Manga extends DefaultEntity{
     private Integer inventory;
 
     @ManyToOne
+    @JoinColumn(name = "id_publisher")
     private Publisher publisher;
 
     @ManyToOne

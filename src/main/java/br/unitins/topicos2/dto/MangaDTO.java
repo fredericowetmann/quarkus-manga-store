@@ -14,7 +14,7 @@ public record MangaDTO (
     Integer inventory,
     Integer numPages,
     Integer volume,
-    // Long publisher,
+    Long publisher,
     Long author
 ){
 

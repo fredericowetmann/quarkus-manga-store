@@ -186,4 +186,19 @@ public class MangaResource {
             return Response.status(Status.NOT_FOUND).entity(error).build();
         }
     }
+
+    @GET
+    @Path("/search/publisherName/{publisherName}")
+    public Response findByPublisher(@PathParam("publisherName") String publisherName){
+
+        try{
+            LOG.infof("Buscando por %s", publisherName);
+            return Response.ok(service.findByPublisher(publisherName)).build();
+        } catch(NotFoundException e){
+            LOG.info("Produto não encontrado");
+            Error error = new Error("404", e.getMessage());
+            
+            return Response.status(Status.NOT_FOUND).entity(error).build();
+        }
+    }
 }

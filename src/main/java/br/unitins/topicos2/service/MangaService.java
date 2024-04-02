@@ -23,5 +23,7 @@ public interface MangaService {
     public MangaResponseDTO findById(Long id);
 
     public List<MangaResponseDTO> findByAuthor(String authorName);
+
+    public List<MangaResponseDTO> findByPublisher(String publisherName);
     
 }
