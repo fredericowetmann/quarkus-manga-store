@@ -90,7 +90,7 @@ public class CollectionResource {
     }
 
     @GET
-    @Path("/search/id/{id}")
+    @Path("/{id}")
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando por coleção de id %s", id);

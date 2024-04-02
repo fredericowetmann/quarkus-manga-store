@@ -88,7 +88,7 @@ public class AddressResource {
     }
 
     @GET
-    @Path("/search/id/{id}")
+    @Path("/{id}")
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando por endereço de id %s", id);
