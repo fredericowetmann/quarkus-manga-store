@@ -5,9 +5,7 @@ import java.util.stream.Collectors;
 
 import br.unitins.topicos2.dto.PublisherDTO;
 import br.unitins.topicos2.dto.PublisherResponseDTO;
-import br.unitins.topicos2.dto.StateResponseDTO;
 import br.unitins.topicos2.model.Publisher;
-import br.unitins.topicos2.model.State;
 import br.unitins.topicos2.repository.PublisherRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

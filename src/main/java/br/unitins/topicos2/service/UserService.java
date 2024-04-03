@@ -24,6 +24,8 @@ public interface UserService {
 
     UserResponseDTO findByLogin(String login);
 
-    List<UserResponseDTO> findByAll(); 
+    List<UserResponseDTO> getAll(int page, int pageSize); 
+
+    long count();
     
 }

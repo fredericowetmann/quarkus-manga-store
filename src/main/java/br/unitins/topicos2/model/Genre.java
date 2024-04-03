@@ -1,9 +1,6 @@
 package br.unitins.topicos2.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Genre extends DefaultEntity {

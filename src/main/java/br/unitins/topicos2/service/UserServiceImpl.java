@@ -2,6 +2,7 @@ package br.unitins.topicos2.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.unitins.topicos2.dto.PhoneDTO;
 import br.unitins.topicos2.dto.UserDTO;
@@ -15,6 +16,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import jakarta.ws.rs.NotFoundException;
 
 @ApplicationScoped
 public class UserServiceImpl implements UserService {
@@ -95,10 +97,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserResponseDTO> findByAll() {
-        return repository.listAll().stream()
-            .map(e -> UserResponseDTO.valueOf(e)).toList();
-    }
+    public List<UserResponseDTO> getAll(int page, int pageSize) {
+        List<User> list = repository
+                                .findAll()
+                                .page(page, pageSize)
+                                .list();
+        if(repository.listAll().stream().map(e -> UserResponseDTO.valueOf(e)).toList().isEmpty()) {
+            throw new NotFoundException("Publisher não encontrada");
+            }
+        return list.stream().map(e -> UserResponseDTO.valueOf(e)).collect(Collectors.toList());
+    }  
 
     @Override
     public UserResponseDTO findByLoginAndPassword(String login, String password) {
@@ -117,5 +125,9 @@ public class UserServiceImpl implements UserService {
         
         return UserResponseDTO.valueOf(user);
     }
-    
+
+    @Override
+    public long count() {
+        return repository.count();
+    }
 }
