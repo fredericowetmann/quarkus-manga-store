@@ -27,6 +27,8 @@ public interface MangaService {
     List<MangaResponseDTO> findByPublisher(String publisherName);
 
     List<MangaResponseDTO> findByCollection(String collectionName);
+    
+    List<MangaResponseDTO> findByGenre(Long id);
 
     long count();
 }

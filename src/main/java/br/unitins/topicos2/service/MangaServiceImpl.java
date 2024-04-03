@@ -2,15 +2,17 @@ package br.unitins.topicos2.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import br.unitins.topicos2.dto.MangaDTO;
 import br.unitins.topicos2.dto.MangaResponseDTO;
+import br.unitins.topicos2.model.Genre;
 // import br.unitins.topicos2.form.MangaImageForm;
 import br.unitins.topicos2.model.Manga;
-import br.unitins.topicos2.model.User;
 import br.unitins.topicos2.repository.AuthorRepository;
 import br.unitins.topicos2.repository.CollectionRepository;
+import br.unitins.topicos2.repository.GenreRepository;
 import br.unitins.topicos2.repository.MangaRepository;
 import br.unitins.topicos2.repository.PublisherRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -33,6 +35,9 @@ public class MangaServiceImpl implements MangaService{
      @Inject
      AuthorRepository authorRepository;
 
+     @Inject
+     GenreRepository genreRepository;
+
     // @Inject
     // MangaFileService fileService;
 
@@ -51,6 +56,15 @@ public class MangaServiceImpl implements MangaService{
         manga.setCollection(collectionRepository.findById(dto.collection()));
         manga.setPublisher(publisherRepository.findById(dto.publisher()));
         manga.setAuthor(authorRepository.findById(dto.author()));
+
+        List<Genre> genres = new ArrayList<>();
+        for (Long genreId : dto.listGenre()) {
+        Genre genre = genreRepository.findById(genreId);
+        if (genre != null) {
+            genres.add(genre);
+            }   
+        }
+        manga.setListGenre(genres);
 
         repository.persist(manga);
 
@@ -77,6 +91,15 @@ public class MangaServiceImpl implements MangaService{
         manga.setCollection(collectionRepository.findById(dto.collection()));
         manga.setPublisher(publisherRepository.findById(dto.publisher()));
         manga.setAuthor(authorRepository.findById(dto.author()));
+
+        List<Genre> genres = new ArrayList<>();
+        for (Long genreId : dto.listGenre()) {
+        Genre genre = genreRepository.findById(genreId);
+        if (genre != null) {
+            genres.add(genre);
+            }   
+        }
+        manga.setListGenre(genres);
 
         return MangaResponseDTO.valueOf(manga);
     }
@@ -162,6 +185,15 @@ public class MangaServiceImpl implements MangaService{
         }
 
         return repository.findByCollection(collectionName).stream().map(e -> MangaResponseDTO.valueOf(e)).toList();
+    }
+
+    @Override
+    public List<MangaResponseDTO> findByGenre(Long id) {
+        if(repository.findByGenre(id).stream().map(e -> MangaResponseDTO.valueOf(e)).toList().isEmpty()){
+            throw new NotFoundException("Nenhum produto encontrado");
+        }
+
+        return repository.findByGenre(id).stream().map(e -> MangaResponseDTO.valueOf(e)).toList();
     }
 
     @Override

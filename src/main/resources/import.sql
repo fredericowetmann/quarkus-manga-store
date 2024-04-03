@@ -59,3 +59,8 @@ insert into manga (`name`, `description`, price, inventory, numPages, volume, id
 insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 3', 'Descrição foda', 60, 50, 300, 20, 2, 2, 2);
 insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 4', 'Descrição foda', 60, 50, 300, 32, 3, 3, 3);
 insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 5', 'Descrição foda', 60, 50, 300, 31, 4, 4, 4);
+
+insert into manga_genre (id_manga, id_genre) values(1, 1);
+insert into manga_genre (id_manga, id_genre) values(1, 2);
+insert into manga_genre (id_manga, id_genre) values(2, 3);
+insert into manga_genre (id_manga, id_genre) values(3, 4);

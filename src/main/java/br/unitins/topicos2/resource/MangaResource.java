@@ -216,4 +216,18 @@ public class MangaResource {
             return Response.status(Status.NOT_FOUND).entity(error).build();
         }
     }
+
+    @GET
+    @Path("/serach/genreId/{genreId}")
+    public Response findByGenreId(@PathParam("genreId") Long genreId){
+        try{
+            LOG.infof("Buscando produtos com generos de id %s", genreId); 
+            return Response.ok(service.findByGenre(genreId)).build();
+        } catch(NotFoundException e){
+            LOG.error("Nenhum produto não encontrado");
+            e.printStackTrace();
+            Error error = new Error("404", e.getMessage());
+            return Response.status(Status.NOT_FOUND).entity(error).build();
+        }
+    }
 }

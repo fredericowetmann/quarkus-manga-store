@@ -1,10 +1,10 @@
 package br.unitins.topicos2.repository;
 
-
 import br.unitins.topicos2.model.Manga;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.NoResultException;
 
 @ApplicationScoped
 public class MangaRepository implements PanacheRepository<Manga>{
@@ -30,5 +30,14 @@ public class MangaRepository implements PanacheRepository<Manga>{
         if (name == null)
             return null;
         return find("UPPER(collection.name) LIKE ?1 ", "%" + name.toUpperCase() + "%");
+    }
+
+    public PanacheQuery<Manga> findByGenre(Long genreId){
+        try{
+            return find("SELECT m FROM Manga m JOIN m.listGenre g WHERE g.id = ?1", genreId);
+        } catch(NoResultException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

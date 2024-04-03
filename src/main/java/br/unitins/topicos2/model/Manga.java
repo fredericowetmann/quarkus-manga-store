@@ -5,6 +5,8 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -33,6 +35,12 @@ public class Manga extends DefaultEntity{
     private Author author;
 
     private String imageName;
+
+    @ManyToMany
+    @JoinTable(name = "manga_genre",
+                joinColumns = @JoinColumn(name = "id_manga"),
+                inverseJoinColumns = @JoinColumn(name = "id_genre"))
+    private List<Genre> listGenre;
 
     public String getName() {
         return name;
@@ -114,4 +122,11 @@ public class Manga extends DefaultEntity{
         this.imageName = imageName;
     }
 
+    public List<Genre> getListGenre() {
+        return listGenre;
+    }
+
+    public void setListGenre(List<Genre> listGenre) {
+        this.listGenre = listGenre;
+    }
 }

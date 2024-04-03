@@ -1,5 +1,7 @@
 package br.unitins.topicos2.dto;
 
+import java.util.List;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,7 +18,8 @@ public record MangaDTO (
     Integer volume,
     Long collection,
     Long publisher,
-    Long author
+    Long author,
+    List<Long> listGenre
 ){
 
 }
