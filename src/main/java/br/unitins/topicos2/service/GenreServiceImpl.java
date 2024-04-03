@@ -81,4 +81,8 @@ public class GenreServiceImpl implements GenreService {
         return list.stream().map(e -> GenreResponseDTO.valueOf(e)).collect(Collectors.toList());
     }  
     
+    @Override
+    public long count() {
+        return repository.count();
+    }
 }

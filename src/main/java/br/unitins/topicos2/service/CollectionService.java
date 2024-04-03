@@ -6,16 +6,17 @@ import br.unitins.topicos2.dto.CollectionDTO;
 import br.unitins.topicos2.dto.CollectionResponseDTO;
 
 public interface CollectionService {
-    public CollectionResponseDTO insert(CollectionDTO dto);
+    CollectionResponseDTO insert(CollectionDTO dto);
 
-    public CollectionResponseDTO update(Long id, CollectionDTO dto);
+    CollectionResponseDTO update(Long id, CollectionDTO dto);
 
-    public void delete(long id);
+    void delete(long id);
 
-    public CollectionResponseDTO findById(long id);
+    CollectionResponseDTO findById(long id);
 
-    public List<CollectionResponseDTO> findByName(String name);
+    List<CollectionResponseDTO> findByName(String name);
 
-    public List<CollectionResponseDTO> getAll(int page, int pageSize);
+    List<CollectionResponseDTO> getAll(int page, int pageSize);
     
+    long count();
 }

@@ -8,24 +8,25 @@ import br.unitins.topicos2.dto.MangaResponseDTO;
 
 public interface MangaService {
 
-    public MangaResponseDTO insert(MangaDTO dto);
+    MangaResponseDTO insert(MangaDTO dto);
 
-    public MangaResponseDTO update(Long id, MangaDTO dto);
+    MangaResponseDTO update(Long id, MangaDTO dto);
 
-    public MangaResponseDTO insertImage(Long id,String name);
+    MangaResponseDTO insertImage(Long id,String name);
 
-    public void delete(Long id);
+    void delete(Long id);
 
-    public List<MangaResponseDTO> getAll(int page, int pageSize);
+    List<MangaResponseDTO> getAll(int page, int pageSize);
 
-    public List<MangaResponseDTO> findByName(String name);
+    List<MangaResponseDTO> findByName(String name);
 
-    public MangaResponseDTO findById(Long id);
+    MangaResponseDTO findById(Long id);
 
-    public List<MangaResponseDTO> findByAuthor(String authorName);
+    List<MangaResponseDTO> findByAuthor(String authorName);
 
-    public List<MangaResponseDTO> findByPublisher(String publisherName);
+    List<MangaResponseDTO> findByPublisher(String publisherName);
 
-    public List<MangaResponseDTO> findByCollection(String collectionName);
-    
+    List<MangaResponseDTO> findByCollection(String collectionName);
+
+    long count();
 }

@@ -164,4 +164,8 @@ public class MangaServiceImpl implements MangaService{
         return repository.findByCollection(collectionName).stream().map(e -> MangaResponseDTO.valueOf(e)).toList();
     }
 
+    @Override
+    public long count() {
+        return repository.count();
+    }
 }

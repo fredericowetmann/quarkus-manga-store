@@ -8,22 +8,22 @@ import jakarta.validation.Valid;
 
 public interface UserService {
 
-    public UserResponseDTO insert(@Valid UserDTO dto);
+    UserResponseDTO insert(@Valid UserDTO dto);
 
-    public UserResponseDTO update(UserDTO dto, Long id);
+    UserResponseDTO update(UserDTO dto, Long id);
 
-    public UserResponseDTO updateNameImagem(Long id, String nameImagem) ;
+    UserResponseDTO updateNameImagem(Long id, String nameImagem) ;
 
-    public void delete(Long id);
+    void delete(Long id);
 
-    public UserResponseDTO findById(Long id);
+    UserResponseDTO findById(Long id);
 
-    public List<UserResponseDTO> findByName(String name);
+    List<UserResponseDTO> findByName(String name);
 
-    public UserResponseDTO findByLoginAndPassword(String login, String password);
+    UserResponseDTO findByLoginAndPassword(String login, String password);
 
-    public UserResponseDTO findByLogin(String login);
+    UserResponseDTO findByLogin(String login);
 
-    public List<UserResponseDTO> findByAll(); 
+    List<UserResponseDTO> findByAll(); 
     
 }

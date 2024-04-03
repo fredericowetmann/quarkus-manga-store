@@ -79,4 +79,8 @@ public class AuthorServiceImpl implements AuthorService {
         return list.stream().map(e -> AuthorResponseDTO.valueOf(e)).collect(Collectors.toList());
     }  
     
+    @Override
+    public long count() {
+        return repository.count();
+    }
 }

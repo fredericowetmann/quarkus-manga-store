@@ -6,16 +6,17 @@ import br.unitins.topicos2.dto.AuthorDTO;
 import br.unitins.topicos2.dto.AuthorResponseDTO;
 
 public interface AuthorService {
-    public AuthorResponseDTO insert(AuthorDTO dto);
+    AuthorResponseDTO insert(AuthorDTO dto);
 
-    public AuthorResponseDTO update(Long id, AuthorDTO dto);
+    AuthorResponseDTO update(Long id, AuthorDTO dto);
 
-    public void delete(long id);
+    void delete(long id);
 
-    public AuthorResponseDTO findById(long id);
+    AuthorResponseDTO findById(long id);
 
-    public List<AuthorResponseDTO> findByName(String name);
+    List<AuthorResponseDTO> findByName(String name);
 
-    public List<AuthorResponseDTO> getAll(int page, int pageSize);
-    
+    List<AuthorResponseDTO> getAll(int page, int pageSize);
+
+    long count();
 }

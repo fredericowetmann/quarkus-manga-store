@@ -81,4 +81,8 @@ public class CollectionServiceImpl implements CollectionService {
         return list.stream().map(e -> CollectionResponseDTO.valueOf(e)).collect(Collectors.toList());
     }  
 
+    @Override
+    public long count() {
+        return repository.count();
+    }
 }

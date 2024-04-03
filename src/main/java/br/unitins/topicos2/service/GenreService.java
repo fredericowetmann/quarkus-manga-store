@@ -6,16 +6,17 @@ import br.unitins.topicos2.dto.GenreDTO;
 import br.unitins.topicos2.dto.GenreResponseDTO;
 
 public interface GenreService {
-    public GenreResponseDTO insert(GenreDTO dto);
+    GenreResponseDTO insert(GenreDTO dto);
 
-    public GenreResponseDTO update(Long id, GenreDTO dto);
+    GenreResponseDTO update(Long id, GenreDTO dto);
 
-    public void delete(long id);
+    void delete(long id);
 
-    public GenreResponseDTO findById(long id);
+    GenreResponseDTO findById(long id);
 
-    public List<GenreResponseDTO> findByName(String name);
+    List<GenreResponseDTO> findByName(String name);
 
-    public List<GenreResponseDTO> getAll(int page, int pageSize);
+    List<GenreResponseDTO> getAll(int page, int pageSize);
     
+    long count();
 }

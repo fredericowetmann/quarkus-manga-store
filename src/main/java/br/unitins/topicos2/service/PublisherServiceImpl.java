@@ -82,4 +82,8 @@ public class PublisherServiceImpl implements PublisherService{
         return list.stream().map(e -> PublisherResponseDTO.valueOf(e)).collect(Collectors.toList());
     }  
     
+    @Override
+    public long count() {
+        return repository.count();
+    }
 }

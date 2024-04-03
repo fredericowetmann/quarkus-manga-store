@@ -6,15 +6,17 @@ import br.unitins.topicos2.dto.PublisherDTO;
 import br.unitins.topicos2.dto.PublisherResponseDTO;
 
 public interface PublisherService {
-    public PublisherResponseDTO insert(PublisherDTO dto);
+    PublisherResponseDTO insert(PublisherDTO dto);
 
-    public PublisherResponseDTO update(Long id, PublisherDTO dto);
+    PublisherResponseDTO update(Long id, PublisherDTO dto);
 
-    public void delete(Long id);
+    void delete(Long id);
 
-    public PublisherResponseDTO findById(Long id);
+    PublisherResponseDTO findById(Long id);
 
-    public List<PublisherResponseDTO> findByName(String name);
+    List<PublisherResponseDTO> findByName(String name);
 
-    public List<PublisherResponseDTO> getAll(int page, int pageSize);
+    List<PublisherResponseDTO> getAll(int page, int pageSize);
+
+    long count();
 }
