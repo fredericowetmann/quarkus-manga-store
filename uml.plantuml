@@ -36,6 +36,7 @@
         - inventory: int
         - numPages: Integer
         - volume: Integer
+        - collection: Collection
         - publisher: Publisher
         - author: Author
         - genre: Genre
@@ -76,7 +77,7 @@
 
     class State{
         - name: String
-        - abreviation: String
+        - acronym: String
     }
 
     class Payment{
@@ -121,8 +122,6 @@
     User "1" --> "1" UserType
 
     User --> Person
-
-    Publisher "1" --> "1" Address
 
     City "*" --> "1" State
 

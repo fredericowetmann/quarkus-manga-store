@@ -17,8 +17,10 @@ insert into city (`name`, id_state) values( 'Gurupi', 1);
 insert into city (`name`, id_state) values( 'Goiânia', 2);
 insert into city (`name`, id_state) values( 'Anápolis', 2);
 
-insert into users (`name`, login, `password`, `profile`) values('Elon Musk', 'musk', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1);
-insert into users (`name`, login, `password`, `profile`) values('Bill Gates', 'gates', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2);
+insert into users (`name`, login, `password`, `profile`) values('Frederico Gomes', 'fredericowetmann', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1);
+insert into users (`name`, login, `password`, `profile`) values('João Antonio', 'boris_brother', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2);
+insert into users (`name`, login, `password`, `profile`) values('João Pedro Gomes', 'JPblack', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1);
+insert into users (`name`, login, `password`, `profile`) values('Alex Recorde de Faltas', 'talimos', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2);
 
 insert into phone (areaCode, `number`) values('63', '9999-9999');
 insert into phone (areaCode, `number`) values('62', '8888-8888');
@@ -34,33 +36,55 @@ insert into address_table (`name`, postalCode, `address`, complement, id_city) v
 insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Trabalho', '11111111', 'Rua almeida, predio 12', 'sede tal', 1);
 insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Casa', '55555440', 'Avenida santa hora ap 22b', 'condominio tal', 1);
 
-insert into author (`name`) values('Frederic Vertman');
-insert into author (`name`) values('Jonathas Antones');
-insert into author (`name`) values('Autor Generico');
-insert into author (`name`) values('Sei lá');
+insert into author (`name`) values('Rifujin na Magonote');
+insert into author (`name`) values('Natsume Akatsuki');
+insert into author (`name`) values('Yoshiyuki Sadamoto');
+insert into author (`name`) values('Yoko Taro');
+insert into author (`name`) values('Yuu Kamiya');
 
-insert into genre (`name`, `description`) values('Hentai', 'SSEEEEGGGGGs UOOHHH');
-insert into genre (`name`, `description`) values('Aventura', 'Aventura pika loca');
-insert into genre (`name`, `description`) values('Ação', 'Ação ação');
-insert into genre (`name`, `description`) values('Isekai', 'Aventuras de outro mundo');
-
-insert into collections (`name`, `description`) values('Blue Archive', 'CUUNNNNNYYYY UOOHHH');
-insert into collections (`name`, `description`) values('Dragon Bolas', 'Aventura pika loca');
-insert into collections (`name`, `description`) values('Mergulhadores do inferno', 'Cima Direita Baixo Baixo Baixo');
-insert into collections (`name`, `description`) values('Fisting of the north', 'Sei lá oq');
+insert into collections (`name`, `description`) values('Mushouku Tensei', 'Um japonês NEET de 34 anos, sem nome, é despejado de sua casa após a morte de seus pais. Após alguma auto-introspecção, ele conclui que sua vida foi, em última análise, sem sentido...');
+insert into collections (`name`, `description`) values('Konosuba', 'A série conta a história de um garoto que é mandado para um mundo fantasioso após a sua morte...');
+insert into collections (`name`, `description`) values('Evangelion', 'Em 2015, quinze anos após um cataclismo global conhecido como Segundo Impacto, o adolescente Shinji Ikari é convocado para a futurística cidade de Tóquio-3 por seu pai distante Gendo Ikari, diretor de uma força paramilitar especial chamada Nerv...');
+insert into collections (`name`, `description`) values('No Game No Life', 'Os irmãos Sora e Shiro são inseparáveis, tanto no mundo real quanto no mundo dos jogos. Suas habilidades individuais combinadas fazem deles uma equipe invencível: Sora, com sua intuição e conhecimento surpreendentes...');
+insert into collections (`name`, `description`) values('Nier Automata', '2B e 9S são enviados em uma incursão para dentro do território das máquinas inimigas, eliminando as ameaças para a Resistência local. Os dois contam com a ajuda de Anemone e mais tarde Pascal. Os andróides acabam testemunhando o nascimento...');
 
 insert into publisher (`name`) values('Panini');
 insert into publisher (`name`) values('Jbc');
 insert into publisher (`name`) values('New pop');
 insert into publisher (`name`) values('Square Enix');
 
-insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 1', 'Descrição foda', 60, 100, 200, 10, 1, 1, 1);
-insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 2', 'Descrição foda', 60, 50, 300, 18, 1, 1, 1);
-insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 3', 'Descrição foda', 60, 50, 300, 20, 2, 2, 2);
-insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 4', 'Descrição foda', 60, 50, 300, 32, 3, 3, 3);
-insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Manga teste 5', 'Descrição foda', 60, 50, 300, 31, 4, 4, 4);
+insert into genre (`name`, `description`) values('Fantasia', 'Poderes mágicos, criaturas não naturais ou outros elementos irreais que não podem ser explicados pela ciência são predominantes e normais para o ambiente em que existem. As histórias de fantasia podem acontecer na Terra ou em outro mundo...');
+insert into genre (`name`, `description`) values('Isekai', 'O protagonista é enviado para outro mundo após morrer no mundo real. Um método comum de morte é ser atropelado por um caminhão e morrer, gerando o meme de "Truck-kun", um caminhão que aparece em muitas séries isekai que mata o protagonista...');
+insert into genre (`name`, `description`) values('Aventura', 'Seja visando um objetivo específico ou apenas lutando para sobreviver, o personagem principal é lançado em situações ou terras desconhecidas e enfrenta continuamente perigos inesperados. A narrativa das histórias de aventura é sempre sobre como...');
+insert into genre (`name`, `description`) values('Comedia', 'Elevar o público com emoções positivas tem prioridade, provocando risos, diversão ou entretenimento geral. Quase sempre, as histórias de comédia são episódicas ou têm finais felizes.');
+insert into genre (`name`, `description`) values('Ação', 'Sequências de ação emocionantes têm prioridade e conflitos significativos entre personagens geralmente são resolvidos com o poder físico. Embora o enredo abrangente possa envolver um grupo contra outro, a narrativa em histórias de ação...');
+insert into genre (`name`, `description`) values('Drama', 'Histórias baseadas em enredo focadas em personagens realistas que vivenciam a luta humana. Como as histórias dramáticas questionam o que significa ser humano, o conflito e as emoções serão relacionáveis, mesmo que os cenários...');
+insert into genre (`name`, `description`) values('Misterio', 'Seja resolvendo um crime ou encontrando uma explicação para uma circunstância intrigante, o elenco principal, voluntária ou relutantemente, torna-se investigadores que devem trabalhar para responder quem, o quê, por que e/ou como do dilema...');
+insert into genre (`name`, `description`) values('Sci-fi', 'Avanços tecnológicos imaginados ou ambientes naturais que atualmente são irreais, mas que poderiam ser inventados, causados ​​ou explicados pela ciência no futuro. A narrativa de histórias de ficção científicaica.');
+insert into genre (`name`, `description`) values('Suspense', 'Incutir uma sensação de antecipação e entusiasmo tem prioridade e é conseguido com uma narrativa repleta de reviravoltas e pistas falsas. A incerteza está presente em cada passo do caminho, muitas vezes prolongada para obter o efeito máximo...');
+insert into genre (`name`, `description`) values('Ecchi', 'Ecchi é uma gíria na língua japonesa para ações sexuais divertidas. Como adjetivo, é utilizado com o significado de “sexy”, “sujo” ou “safado”; como verbo, ecchi suru significa "fazer sexo" e, como substantivo, é usado para descrever...');
+
+
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Mushoku Tensei', '"Que droga... Eu não tive uma vida satisfatória... Ah, se eu pudesse recomeçar mais uma vez a minha vida..."', 34.90, 40, 180, 1, 1, 1, 1);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Konosuba', 'Kazuma Sato era um jovem antissocial e viciado em jogos cujo fim chegou cedo, quando perdeu a vida em um acidente...', 34.90, 50, 168, 1, 2, 1, 2);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Neon Genesis Evangelion Collectors Edition', 'Uma trama complexa, que aborda temas profundos como a psique humana, seus conflitos internos e relacionamentos...', 74.94, 50, 336, 1, 3, 2, 3);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('No Game No Life', 'Vou transmitir a vocês os romances dos cinco mais falados em Disboard, tá?!!! Em Disboard, um mundo em que tudo era decidido por jogos...', 38.90, 20, 496, 11, 4, 3, 5);
+insert into manga (`name`, `description`, price, inventory, numPages, volume, id_collection, id_publisher, id_author) values('Yorha: Pearl Harbor Descent Record', 'The distant future. Invaders from another world attack without warning, unleashing a new type of threat: weapons known as "machine lifeforms."...', 74.61, 55, 176, 1, 5, 4, 4);
 
 insert into manga_genre (id_manga, id_genre) values(1, 1);
 insert into manga_genre (id_manga, id_genre) values(1, 2);
+insert into manga_genre (id_manga, id_genre) values(2, 1);
+insert into manga_genre (id_manga, id_genre) values(2, 2);
 insert into manga_genre (id_manga, id_genre) values(2, 3);
-insert into manga_genre (id_manga, id_genre) values(3, 4);
+insert into manga_genre (id_manga, id_genre) values(2, 4);
+insert into manga_genre (id_manga, id_genre) values(3, 5);
+insert into manga_genre (id_manga, id_genre) values(3, 6);
+insert into manga_genre (id_manga, id_genre) values(3, 7);
+insert into manga_genre (id_manga, id_genre) values(3, 8);
+insert into manga_genre (id_manga, id_genre) values(3, 9);
+insert into manga_genre (id_manga, id_genre) values(4, 1);
+insert into manga_genre (id_manga, id_genre) values(4, 4);
+insert into manga_genre (id_manga, id_genre) values(4, 10);
+insert into manga_genre (id_manga, id_genre) values(4, 2);
+insert into manga_genre (id_manga, id_genre) values(5, 5);
+insert into manga_genre (id_manga, id_genre) values(5, 8);
