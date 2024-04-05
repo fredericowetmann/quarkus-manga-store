@@ -22,15 +22,23 @@ insert into users (`name`, login, `password`, `profile`) values('João Antonio',
 insert into users (`name`, login, `password`, `profile`) values('João Pedro Gomes', 'JPblack', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1);
 insert into users (`name`, login, `password`, `profile`) values('Alex Recorde de Faltas', 'talimos', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2);
 
-insert into phone (areaCode, `number`) values('63', '9999-9999');
-insert into phone (areaCode, `number`) values('62', '8888-8888');
-insert into phone (areaCode, `number`) values('61', '7777-7777');
-insert into phone (areaCode, `number`) values('55', '6666-6666');
+insert into phone (areaCode, `number`) values('63', '98434-6823');
+insert into phone (areaCode, `number`) values('62', '7834-2386');
+insert into phone (areaCode, `number`) values('61', '9245-8923');
+insert into phone (areaCode, `number`) values('55', '9285-6396');
+insert into phone (areaCode, `number`) values('63', '99263-9654');
+insert into phone (areaCode, `number`) values('62', '4689-7384');
+insert into phone (areaCode, `number`) values('61', '9263-9543');
+insert into phone (areaCode, `number`) values('55', '8535-7615');
 
 insert into user_phone (id_user, id_phone) values(1, 1);
 insert into user_phone (id_user, id_phone) values(1, 2);
 insert into user_phone (id_user, id_phone) values(2, 3);
 insert into user_phone (id_user, id_phone) values(2, 4);
+insert into user_phone (id_user, id_phone) values(3, 5);
+insert into user_phone (id_user, id_phone) values(3, 6);
+insert into user_phone (id_user, id_phone) values(4, 7);
+insert into user_phone (id_user, id_phone) values(4, 8);
 
 insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Casa', '0000000', 'Avenida 5 casa 5', 'Em frente ao bar do zé', 1);
 insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Trabalho', '11111111', 'Rua almeida, predio 12', 'sede tal', 1);

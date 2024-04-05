@@ -67,8 +67,17 @@ public class UserServiceImpl implements UserService {
         user.setName(dto.name());
         user.setPassword(dto.password());
 
-        // falta a implementacao dos phones
-        // vcs (ALUNOS) devem implementar!!!!!
+        // Atualiza os telefones do usuário
+    if (dto.listaPhone() != null && !dto.listaPhone().isEmpty()) {
+        user.getListaPhone().clear(); // Limpa a lista de telefones existente
+
+        for (PhoneDTO tel : dto.listaPhone()) {
+            Phone phone = new Phone();
+            phone.setAreaCode(tel.areaCode());
+            phone.setNumber(tel.number());
+            user.getListaPhone().add(phone);
+        }
+    }
         
         return UserResponseDTO.valueOf(user);
     }
