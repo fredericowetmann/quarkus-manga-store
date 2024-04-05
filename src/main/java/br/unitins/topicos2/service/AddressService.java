@@ -19,4 +19,7 @@ public interface AddressService {
 
     List<AddressResponseDTO> findByCity(long id);
     
+    long count();
 }
+    
+

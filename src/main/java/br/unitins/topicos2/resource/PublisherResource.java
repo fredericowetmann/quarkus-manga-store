@@ -120,5 +120,10 @@ public class PublisherResource {
         }
     }
 
+    @GET
+    @Path("/count")
+    public long count(){
+        return service.count();
+    }
     
 }

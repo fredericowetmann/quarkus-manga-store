@@ -230,4 +230,10 @@ public class MangaResource {
             return Response.status(Status.NOT_FOUND).entity(error).build();
         }
     }
+
+    @GET
+    @Path("/count")
+    public long count(){
+        return service.count();
+    }
 }

@@ -67,4 +67,10 @@ public class UserResource {
     public Response findByName(@PathParam("name") String name) {
         return Response.ok(service.findByName(name)).build();
     }
+
+    @GET
+    @Path("/count")
+    public long count(){
+        return service.count();
+    }
 }

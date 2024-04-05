@@ -59,7 +59,7 @@ public class CityResource {
         LOG.debug("Exemplo de debug.");
         return Response.ok(service.getAll(page, pageSize)).build();
     }
-    
+
     @GET
     @Path("/{id}")
     public Response findById(@PathParam("id") Long id) {
@@ -70,5 +70,11 @@ public class CityResource {
     @Path("/search/name/{name}")
     public Response findByName(@PathParam("name") String name) {
         return Response.ok(service.findByName(name)).build();
+    }
+
+    @GET
+    @Path("/count")
+    public long count(){
+        return service.count();
     }
 }

@@ -111,4 +111,10 @@ public class AddressServiceImpl implements AddressService{
 
         return repository.findByCity(id).stream().map(e -> AddressResponseDTO.valueOf(e)).toList();
     }
+
+    @Override
+    public long count() {
+        return repository.count();
+    }
 }
+
