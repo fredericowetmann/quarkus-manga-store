@@ -4,6 +4,7 @@ import org.jboss.logging.Logger;
 import br.unitins.topicos2.dto.StateDTO;
 import br.unitins.topicos2.dto.StateResponseDTO;
 import br.unitins.topicos2.service.StateService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -54,6 +55,7 @@ public class StateResource {
     }
 
     @GET
+    @RolesAllowed({"Admin"})
     public Response findAll(
                 @QueryParam("page") @DefaultValue("0") int page,
                 @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
