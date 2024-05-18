@@ -2,6 +2,7 @@ package br.unitins.topicos2.resource;
 
 import br.unitins.topicos2.dto.AuthorDTO;
 import br.unitins.topicos2.service.AuthorService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -34,6 +35,7 @@ public class AuthorResource {
     private static final Logger LOG = Logger.getLogger(AuthResource.class);
 
     @POST
+    @RolesAllowed({"Admin"})
     public Response insert(AuthorDTO dto){
         try{
             LOG.info("Inserindo autor");
@@ -49,6 +51,7 @@ public class AuthorResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response update(@PathParam("id") Long id, AuthorDTO dto){
         try{
             LOG.info("Atualizando os dados do autor");
@@ -64,6 +67,7 @@ public class AuthorResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response delete(@PathParam("id") Long id){
         try{
             LOG.infof("Deletando autor de id %s", id);
@@ -77,6 +81,7 @@ public class AuthorResource {
     }
 
     @GET
+    @RolesAllowed({ "User", "Admin" })
     public Response findAll(@QueryParam("page") @DefaultValue("0") int page,
     @QueryParam("pageSize") @DefaultValue("100") int pageSize){
         try{
@@ -104,6 +109,7 @@ public class AuthorResource {
 
     @GET
     @Path("/search/{AuthorName}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findByAuthorName(@PathParam("AuthorName") String authorName){
         try{
             LOG.infof("Buscando por %s", authorName);

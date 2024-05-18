@@ -5,6 +5,7 @@ import org.jboss.logging.Logger;
 import br.unitins.topicos2.dto.AddressDTO;
 import br.unitins.topicos2.repository.AddressRepository;
 import br.unitins.topicos2.service.AddressService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -36,6 +37,7 @@ public class AddressResource {
     private static final Logger LOG = Logger.getLogger(AuthResource.class);
 
     @POST
+    @RolesAllowed({ "User", "Admin" })
     public Response insert(AddressDTO dto){
 
         try{
@@ -52,6 +54,7 @@ public class AddressResource {
     @PUT
     @Transactional
     @Path("/{idAddress}")
+    @RolesAllowed({ "User", "Admin" })
     public Response update(@PathParam("idAddress") Long idAddress, AddressDTO dto){
 
         try{
@@ -74,6 +77,7 @@ public class AddressResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response delete(@PathParam("id") Long idAddress){
         try{
             LOG.infof("Deletando endereço de id %s", idAddress);
@@ -89,6 +93,7 @@ public class AddressResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando por endereço de id %s", id);
@@ -101,6 +106,7 @@ public class AddressResource {
     }
 
     @GET
+    @RolesAllowed({"Admin"})
     public Response findAll(){
 
         try{
@@ -116,6 +122,7 @@ public class AddressResource {
 
     @GET
     @Path("/search/city/{cityId}")
+    @RolesAllowed({"Admin"})
     public Response findByCity(@PathParam("cityId")Long cityId){
 
         try{

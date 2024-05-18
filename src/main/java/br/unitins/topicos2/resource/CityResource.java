@@ -32,6 +32,7 @@ public class CityResource {
     private static final Logger LOG = Logger.getLogger(CityResource.class);
 
     @POST
+    @RolesAllowed({"Admin"})
     public Response create(CityDTO dto) {
         CityResponseDTO retorno = service.create(dto);
         //return Response.status(Status.CREATED).entity(retorno).build();
@@ -41,6 +42,7 @@ public class CityResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response update(CityDTO dto, @PathParam("id") Long id) {
         service.update(id, dto);
         return Response.status(Status.NO_CONTENT).build();
@@ -49,13 +51,14 @@ public class CityResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response delete(@PathParam("id") Long id) {
         service.delete(id);
         return Response.status(Status.NO_CONTENT).build();
     }
 
     @GET
-    @RolesAllowed({"User"})
+    @RolesAllowed({ "User", "Admin" })
     public Response findAll(@QueryParam("page") @DefaultValue("0") int page,
     @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
         LOG.debug("Exemplo de debug.");
@@ -64,12 +67,14 @@ public class CityResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response findById(@PathParam("id") Long id) {
         return Response.ok(service.findById(id)).build();
     }
     
     @GET
     @Path("/search/name/{name}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findByName(@PathParam("name") String name) {
         return Response.ok(service.findByName(name)).build();
     }

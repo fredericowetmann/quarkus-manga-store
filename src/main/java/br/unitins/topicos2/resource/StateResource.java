@@ -32,6 +32,7 @@ public class StateResource {
     private static final Logger LOG = Logger.getLogger(StateResource.class);
 
     @POST
+    @RolesAllowed({"Admin"})
     public Response create(StateDTO dto) {
         StateResponseDTO retorno = service.create(dto);
         //return Response.status(Status.CREATED).entity(retorno).build();
@@ -41,6 +42,7 @@ public class StateResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response update(StateDTO dto, @PathParam("id") Long id) {
         service.update(id, dto);
         return Response.status(Status.NO_CONTENT).build();
@@ -49,13 +51,14 @@ public class StateResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response delete(@PathParam("id") Long id) {
         service.delete(id);
         return Response.status(Status.NO_CONTENT).build();
     }
 
     @GET
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({ "User", "Admin" })
     public Response findAll(
                 @QueryParam("page") @DefaultValue("0") int page,
                 @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
@@ -66,12 +69,14 @@ public class StateResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response findById(@PathParam("id") Long id) {
         return Response.ok(service.findById(id)).build();
     }
     
     @GET
     @Path("/search/name/{name}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findByName(@PathParam("name") String name) {
         return Response.ok(service.findByName(name)).build();
     }

@@ -2,6 +2,7 @@ package br.unitins.topicos2.resource;
 
 import br.unitins.topicos2.dto.GenreDTO;
 import br.unitins.topicos2.service.GenreService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -34,6 +35,7 @@ public class GenreResource {
     private static final Logger LOG = Logger.getLogger(AuthResource.class);
 
     @POST
+    @RolesAllowed({"Admin"})
     public Response insert(GenreDTO dto){
         try{
             LOG.info("Inserindo genero");
@@ -49,6 +51,7 @@ public class GenreResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response update(@PathParam("id") Long id, GenreDTO dto){
         try{
             LOG.info("Atualizando os dados do genero");
@@ -64,6 +67,7 @@ public class GenreResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response delete(@PathParam("id") Long id){
         try{
             LOG.infof("Deletando genero de id %s", id);
@@ -77,6 +81,7 @@ public class GenreResource {
     }
 
     @GET
+    @RolesAllowed({ "User", "Admin" })
     public Response findAll(@QueryParam("page") @DefaultValue("0") int page,
     @QueryParam("pageSize") @DefaultValue("100") int pageSize){
         try{
@@ -91,6 +96,7 @@ public class GenreResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando por genero de id %s", id);
@@ -104,6 +110,7 @@ public class GenreResource {
 
     @GET
     @Path("/search/{GenreName}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findByGenreName(@PathParam("GenreName") String genreName){
         try{
             LOG.infof("Buscando por %s", genreName);

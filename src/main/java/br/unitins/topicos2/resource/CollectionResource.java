@@ -2,6 +2,7 @@ package br.unitins.topicos2.resource;
 
 import br.unitins.topicos2.dto.CollectionDTO;
 import br.unitins.topicos2.service.CollectionService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -34,6 +35,7 @@ public class CollectionResource {
     private static final Logger LOG = Logger.getLogger(AuthResource.class);
 
     @POST
+    @RolesAllowed({"Admin"})
     public Response insert(CollectionDTO dto){
         try{
             LOG.info("Inserindo coleção");
@@ -49,6 +51,7 @@ public class CollectionResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response update(@PathParam("id") Long id, CollectionDTO dto){
         try{
             LOG.info("Atualizando os dados da coleção");
@@ -64,6 +67,7 @@ public class CollectionResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response delete(@PathParam("id") Long id){
         try{
             LOG.infof("Deletando coleção de id %s", id);
@@ -77,6 +81,7 @@ public class CollectionResource {
     }
 
     @GET
+    @RolesAllowed({ "User", "Admin" })
     public Response findAll(@QueryParam("page") @DefaultValue("0") int page,
     @QueryParam("pageSize") @DefaultValue("100") int pageSize){
         try{
@@ -91,6 +96,7 @@ public class CollectionResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando por coleção de id %s", id);
@@ -104,6 +110,7 @@ public class CollectionResource {
 
     @GET
     @Path("/search/{CollectionName}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findByCollectionName(@PathParam("CollectionName") String collectionName){
         try{
             LOG.infof("Buscando por %s", collectionName);

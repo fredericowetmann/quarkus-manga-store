@@ -4,6 +4,7 @@ import org.jboss.logging.Logger;
 
 import br.unitins.topicos2.dto.PublisherDTO;
 import br.unitins.topicos2.service.PublisherService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -34,6 +35,7 @@ public class PublisherResource {
     private static final Logger LOG = Logger.getLogger(AuthResource.class);
 
     @POST
+    @RolesAllowed({"Admin"})
     public Response insert(PublisherDTO dto){
         try{
             LOG.info("Inserindo publisher");
@@ -49,6 +51,7 @@ public class PublisherResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response update(@PathParam("id") Long id, PublisherDTO dto){
         try{
             LOG.info("Iniciando update da publisher");
@@ -65,6 +68,7 @@ public class PublisherResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response delete(@PathParam("id") Long id){
         try{
             LOG.infof("Deletando publisher de id %s", id);
@@ -79,6 +83,7 @@ public class PublisherResource {
     }
 
     @GET
+    @RolesAllowed({ "User", "Admin" })
     public Response findAll(@QueryParam("page") @DefaultValue("0") int page,
     @QueryParam("pageSize") @DefaultValue("100") int pageSize){
         try{
@@ -94,6 +99,7 @@ public class PublisherResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando por publisher de id %s", id);
@@ -108,6 +114,7 @@ public class PublisherResource {
 
     @GET
     @Path("/search/name/{name}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findByName(@PathParam("name") String name){
         try{
             LOG.infof("Buscando por %s", name);

@@ -12,6 +12,7 @@ import br.unitins.topicos2.model.Manga;
 import br.unitins.topicos2.repository.MangaRepository;
 // import br.unitins.topicos2.service.MangaFileService;
 import br.unitins.topicos2.service.MangaService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -50,6 +51,7 @@ public class MangaResource {
     private static final Logger LOG = Logger.getLogger(AuthResource.class);
 
     @POST
+    @RolesAllowed({"Admin"})
     public Response insert(MangaDTO dto){
         try{
             LOG.info("Inserindo produto");
@@ -65,6 +67,7 @@ public class MangaResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response update(@PathParam("id") Long id, MangaDTO dto){
         try{
             LOG.infof("Update em produto de id %s", id);
@@ -116,6 +119,7 @@ public class MangaResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response delete(@PathParam("id") Long id){
         try{
             LOG.info("Deletando o produto");
@@ -130,6 +134,7 @@ public class MangaResource {
     }
 
     @GET
+    @RolesAllowed({ "User", "Admin" })
     public Response findAll(@QueryParam("page") @DefaultValue("0") int page,
     @QueryParam("pageSize") @DefaultValue("100") int pageSize){
         try{
@@ -145,6 +150,7 @@ public class MangaResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando produto de id %s", id); 
@@ -159,6 +165,7 @@ public class MangaResource {
 
     @GET
     @Path("/search/name/{name}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findByName(@PathParam("name") String name){
 
         try{
@@ -174,6 +181,7 @@ public class MangaResource {
 
     @GET
     @Path("/search/authorName/{authorName}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findByAuthor(@PathParam("authorName") String authorName){
 
         try{
@@ -189,6 +197,7 @@ public class MangaResource {
 
     @GET
     @Path("/search/publisherName/{publisherName}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findByPublisher(@PathParam("publisherName") String publisherName){
 
         try{
@@ -204,6 +213,7 @@ public class MangaResource {
 
     @GET
     @Path("/search/collectionName/{collectionName}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findByCollection(@PathParam("collectionName") String collectionName){
 
         try{
@@ -219,6 +229,7 @@ public class MangaResource {
 
     @GET
     @Path("/serach/genreId/{genreId}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findByGenreId(@PathParam("genreId") Long genreId){
         try{
             LOG.infof("Buscando produtos com generos de id %s", genreId); 
