@@ -7,10 +7,9 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import br.unitins.topicos2.dto.MangaDTO;
 import br.unitins.topicos2.dto.MangaResponseDTO;
-// import br.unitins.topicos2.form.MangaImageForm;
-import br.unitins.topicos2.model.Manga;
+import br.unitins.topicos2.form.MangaImageForm;
 import br.unitins.topicos2.repository.MangaRepository;
-// import br.unitins.topicos2.service.MangaFileService;
+import br.unitins.topicos2.service.MangaFileService;
 import br.unitins.topicos2.service.MangaService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
@@ -45,8 +44,8 @@ public class MangaResource {
     @Inject
     MangaRepository repository;
 
-    // @Inject
-    // MangaFileService fileService;
+    @Inject
+    MangaFileService fileService;
 
     private static final Logger LOG = Logger.getLogger(AuthResource.class);
 
@@ -81,40 +80,40 @@ public class MangaResource {
         }
     }
 
-    // @PATCH
-    // @Path("/upload/image/")
-    // @RolesAllowed({"Admin"})
-    // @Consumes(MediaType.MULTIPART_FORM_DATA)
-    // @Produces(MediaType.TEXT_PLAIN)
-    // public Response insertImage(@MultipartForm MangaImageForm form){
-    //     //String imageName;
-    //     Long id = form.getId();
-    //     try{
-    //         LOG.infof("Inserindo imagem ao produto de id %s", id);
-    //         String imageName = fileService.save(form.getNomeImagem(), form.getImagem());
-    //         service.insertImage(id, imageName);
-    //         return Response.noContent().build();
-    //     } catch(IOException e){
-    //         LOG.error("Erro ao inserir imagem");
-    //         e.printStackTrace();
-    //         Error error = new Error("409", e.getMessage());
-    //         return Response.status(Status.CONFLICT).entity(error).build();
-    //     }
-    // }
+     @PATCH
+     @Path("/image/upload")
+     @RolesAllowed({"Admin"})
+     @Consumes(MediaType.MULTIPART_FORM_DATA)
+     @Produces(MediaType.TEXT_PLAIN)
+     public Response insertImage(@MultipartForm MangaImageForm form){
+         //String imageName;
+         Long id = form.getId();
+         try{
+             LOG.infof("Inserindo imagem ao produto de id %s", id);
+             String imageName = fileService.save(form.getNomeImagem(), form.getImagem());
+             service.insertImage(id, imageName);
+             return Response.noContent().build();
+         } catch(IOException e){
+             LOG.error("Erro ao inserir imagem");
+             e.printStackTrace();
+             Error error = new Error("409", e.getMessage());
+             return Response.status(Status.CONFLICT).entity(error).build();
+         }
+     }
 
-    // @GET
-    // @Path("/download/image/{id}")
-    // @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    // public Response downloadImage(@PathParam("id")Long id){
+     @GET
+     @Path("/image/download/{id}")
+     @Produces(MediaType.APPLICATION_OCTET_STREAM)
+     public Response downloadImage(@PathParam("id")Long id){
 
-    //     LOG.infof("Buscando imagem do usuario de id %s", id);
-    //     MangaResponseDTO manga = service.findById(id);
-    //     String imageName = manga.imageName();
+         LOG.infof("Buscando imagem do usuario de id %s", id);
+         MangaResponseDTO manga = service.findById(id);
+         String imageName = manga.imageName();
 
-    //     ResponseBuilder response = Response.ok(fileService.getFile(imageName));
-    //     response.header("Content-Disposition", "attachment;filename="+imageName);
-    //     return response.build();
-    // }
+         ResponseBuilder response = Response.ok(fileService.getFile(imageName));
+         response.header("Content-Disposition", "attachment;filename="+imageName);
+         return response.build();
+     }
 
     @DELETE
     @Transactional
@@ -228,7 +227,7 @@ public class MangaResource {
     }
 
     @GET
-    @Path("/serach/genreId/{genreId}")
+    @Path("/search/genreId/{genreId}")
     @RolesAllowed({ "User", "Admin" })
     public Response findByGenreId(@PathParam("genreId") Long genreId){
         try{

@@ -17,6 +17,8 @@ insert into city (`name`, id_state) values( 'Gurupi', 1);
 insert into city (`name`, id_state) values( 'Goiânia', 2);
 insert into city (`name`, id_state) values( 'Anápolis', 2);
 
+insert into users (`name`, login, `password`, `profile`) values('Usuario', 'user', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1);
+insert into users (`name`, login, `password`, `profile`) values('Administrador', 'admin', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2);
 insert into users (`name`, login, `password`, `profile`) values('Frederico Gomes', 'fredericowetmann', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1);
 insert into users (`name`, login, `password`, `profile`) values('João Antonio', 'boris_brother', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2);
 insert into users (`name`, login, `password`, `profile`) values('João Pedro Gomes', 'JPblack', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1);

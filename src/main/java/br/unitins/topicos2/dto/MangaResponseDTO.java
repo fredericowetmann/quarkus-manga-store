@@ -19,11 +19,11 @@ public record MangaResponseDTO (
     Collection collection,
     Publisher publisher,
     Author author,
-//    String imageName
+    String imageName,
     List<Genre> listGenre
 ){
     public static MangaResponseDTO valueOf(Manga manga){
-        return new MangaResponseDTO(manga.getId(), manga.getName(), manga.getDescription(), manga.getPrice(), manga.getInventory(), manga.getNumPages(), manga.getVolume(), manga.getCollection(), manga.getPublisher(), manga.getAuthor(), manga.getListGenre());
+        return new MangaResponseDTO(manga.getId(), manga.getName(), manga.getDescription(), manga.getPrice(), manga.getInventory(), manga.getNumPages(), manga.getVolume(), manga.getCollection(), manga.getPublisher(), manga.getAuthor(), manga.getImageName(), manga.getListGenre());
     }
     
 }

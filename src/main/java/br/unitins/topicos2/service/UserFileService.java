@@ -26,7 +26,7 @@ public class UserFileService implements FileService {
     private static final int MAX_FILE_SIZE = 1024 * 1024 * 10; // 10mb 
 
     @Override
-    public String salvar(String nomeArquivo, byte[] arquivo) throws IOException {
+    public String save(String nomeArquivo, byte[] arquivo) throws IOException {
         verificarTamanhoImagem(arquivo);
 
         verificarTipoImagem(nomeArquivo);
@@ -55,7 +55,7 @@ public class UserFileService implements FileService {
     }
 
     @Override
-    public File obter(String nomeArquivo) {
+    public File getFile(String nomeArquivo) {
         File file = new File(PATH_USER+nomeArquivo);
         return file;
     }

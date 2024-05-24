@@ -55,7 +55,7 @@ public class UserLogadoResource {
     public Response salvarImagem(@MultipartForm UserImageForm form){
         String nameImagem;
         try {
-            nameImagem = fileService.salvar(form.getNameImagem(), form.getImagem());
+            nameImagem = fileService.save(form.getNameImagem(), form.getImagem());
         } catch (IOException e) {
             e.printStackTrace();
             Error error = new Error("409", e.getMessage());
@@ -75,7 +75,7 @@ public class UserLogadoResource {
     @RolesAllowed({ "User", "Admin" })
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response download(@PathParam("nameImagem") String nameImagem) {
-        ResponseBuilder response = Response.ok(fileService.obter(nameImagem));
+        ResponseBuilder response = Response.ok(fileService.getFile(nameImagem));
         response.header("Content-Disposition", "attachment;filename="+nameImagem);
         return response.build();
     }

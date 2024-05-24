@@ -1,6 +1,5 @@
 package br.unitins.topicos2.service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -8,7 +7,6 @@ import java.util.stream.Collectors;
 import br.unitins.topicos2.dto.MangaDTO;
 import br.unitins.topicos2.dto.MangaResponseDTO;
 import br.unitins.topicos2.model.Genre;
-// import br.unitins.topicos2.form.MangaImageForm;
 import br.unitins.topicos2.model.Manga;
 import br.unitins.topicos2.repository.AuthorRepository;
 import br.unitins.topicos2.repository.CollectionRepository;
@@ -38,8 +36,8 @@ public class MangaServiceImpl implements MangaService{
      @Inject
      GenreRepository genreRepository;
 
-    // @Inject
-    // MangaFileService fileService;
+    @Inject
+    MangaFileService fileService;
 
     @Override
     @Transactional
@@ -112,7 +110,7 @@ public class MangaServiceImpl implements MangaService{
         }
 
         Manga manga = repository.findById(id);
-        // manga.setImageName(name);
+        manga.setImageName(name);
 
         return MangaResponseDTO.valueOf(manga);
     }
