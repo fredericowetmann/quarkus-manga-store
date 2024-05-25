@@ -49,11 +49,9 @@ public class AuthResource {
         else
             LOG.info("Login e senha incorretos.");
         
-        String token = jwtService.generateJwt(result);
-
-        LOG.info("Finalizando o processo de login.");
-
-        return Response.ok().header("Authorization", token).build();
+        return Response.ok(result)
+            .header("Authorization", jwtService.generateJwt(result))
+            .build();
     }
   
 }
