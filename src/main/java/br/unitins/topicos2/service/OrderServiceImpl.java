@@ -3,7 +3,6 @@ package br.unitins.topicos2.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import br.unitins.topicos2.dto.ItemOrderDTO;
 import br.unitins.topicos2.dto.OrderDTO;
@@ -44,12 +43,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderResponseDTO insert(OrderDTO dto, String login) {
+    public OrderResponseDTO insert(OrderDTO dto, String email) {
 
         if(dto.itens().isEmpty() || dto == null || dto.itens() == null){
             throw new ValidationException("400", "Não há produtos na compra");
         }
-        User user = userRepository.findByLogin(login);
+        User user = userRepository.findByEmail(email);
 
         /* if(user.getPhysicalPerson() == null || user.getPhysicalPerson().getCpf() == null || user.getPhysicalPerson().getName() == null){
             throw new ValidationException("400", "Seu perfil de usuario não está completo");
@@ -84,7 +83,7 @@ public class OrderServiceImpl implements OrderService {
 
         //pedido.setPayment(new Payment(total));
 
-        pedido.setUser(userRepository.findByLogin(login));
+        pedido.setUser(userRepository.findByEmail(email));
 
         orderRepository.persist(pedido);
 
@@ -105,8 +104,8 @@ public class OrderServiceImpl implements OrderService {
 
     // @Override
     // @Transactional
-    // public void payUsingPix(String login) {
-    //     User user = userRepository.findByEmail(login);
+    // public void payUsingPix(String email) {
+    //     User user = userRepository.findByEmail(email);
 
         
     //     Order order = validar(user);
@@ -126,8 +125,8 @@ public class OrderServiceImpl implements OrderService {
 
     // @Override
     // @Transactional
-    // public void payUsingCreditCard(String login, CreditCardDTO creditCardDTO) {
-    //     User user = userRepository.findByEmail(login);
+    // public void payUsingCreditCard(String email, CreditCardDTO creditCardDTO) {
+    //     User user = userRepository.findByEmail(email);
 
     //     Order order = validar(user);
 
@@ -167,18 +166,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderResponseDTO> getAll(int page, int pageSize) {
-        List<Order> list = orderRepository
-                                .findAll()
-                                .page(page, pageSize)
-                                .list();
-        
-        return list.stream().map(e -> OrderResponseDTO.valueOf(e)).collect(Collectors.toList());
-    }  
-
-    @Override
-    public List<OrderResponseDTO> findByAll(String login) {
-        return orderRepository.listAll().stream()
+    public List<OrderResponseDTO> findByLogin(String login) {
+        return orderRepository.findByLogin(login).stream()
             .map(e -> OrderResponseDTO.valueOf(e)).toList();
     }
     

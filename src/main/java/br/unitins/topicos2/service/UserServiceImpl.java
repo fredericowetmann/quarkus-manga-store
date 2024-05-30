@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.unitins.topicos2.dto.PhoneDTO;
+import br.unitins.topicos2.dto.UserBasicDTO;
+import br.unitins.topicos2.dto.UserBasicResponseDTO;
 import br.unitins.topicos2.dto.UserDTO;
 import br.unitins.topicos2.dto.UserResponseDTO;
 import br.unitins.topicos2.model.Profile;
@@ -31,16 +33,15 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserResponseDTO insert(@Valid UserDTO dto) {
 
-       if (repository.findByLogin(dto.login()) != null) {
-            throw new ValidationException("login", "Login já existe.");
+       if (repository.findByEmail(dto.email()) != null) {
+            throw new ValidationException("email", "Email já existe.");
         }
 
         User novoUser = new User();
         novoUser.setName(dto.name());
-        novoUser.setLogin(dto.login());
-
+        novoUser.setEmail(dto.email());
+        novoUser.setCpf(dto.cpf());
         novoUser.setPassword(hashService.getHashPassword(dto.password()));
-
         novoUser.setProfile(Profile.valueOf(dto.idProfile()));
 
         if (dto.listaPhone() != null && 
@@ -61,11 +62,39 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public UserBasicResponseDTO insertBasicUser(UserBasicDTO dto) {
+        if (dto.email() == null || dto.email().isEmpty()) {
+            throw new ValidationException("email", "O email não pode estar em branco");
+        } else if (dto.password() == null || dto.password().isEmpty()) {
+            throw new ValidationException("senha", "A senha não pode estar em branco");
+        } else if (dto.name() == null || dto.name().isEmpty()) {
+            throw new ValidationException("nome", "O nome não pode estar em branco");
+        }
+
+        if (repository.existsByEmail(dto.email())) {
+            throw new ValidationException("400", "O email já existe");
+        }
+
+        User newUser = new User();
+
+        newUser.setName(dto.name());
+        newUser.setEmail(dto.email());
+        newUser.setPassword(hashService.getHashPassword(dto.password()));
+        newUser.setProfile(Profile.valueOf(1));
+
+        repository.persist(newUser);
+
+        return UserBasicResponseDTO.valueOf(newUser);
+    }
+
+    @Override
+    @Transactional
     public UserResponseDTO update(UserDTO dto, Long id) {
         User user = repository.findById(id);
-        user.setLogin(dto.login());
+        user.setEmail(dto.email());
         user.setName(dto.name());
         user.setPassword(dto.password());
+        user.setCpf(dto.cpf());
 
         // Atualiza os telefones do usuário
     if (dto.listaPhone() != null && !dto.listaPhone().isEmpty()) {
@@ -84,15 +113,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserResponseDTO updateNameImagem(Long id, String nameImagem) {
+    public UserResponseDTO updateImageName(Long id, String imageName) {
         User user = repository.findById(id);
-        user.setNameImagem(nameImagem);
+        user.setImageName(imageName);
         return UserResponseDTO.valueOf(user);
     }
 
     @Override
     @Transactional
     public void delete(Long id) {
+        if(!repository.deleteById(id)){
+            throw new NotFoundException("Usuario não encontrado");
+        }
     }
 
     @Override
@@ -118,19 +150,19 @@ public class UserServiceImpl implements UserService {
     }  
 
     @Override
-    public UserResponseDTO findByLoginAndPassword(String login, String password) {
-        User user = repository.findByLoginAndPassword(login, password);
+    public UserResponseDTO findByEmailAndPassword(String email, String password) {
+        User user = repository.findByEmailAndPassword(email, password);
         if (user == null) 
-            throw new ValidationException("login", "Login ou password inválido");
+            throw new ValidationException("email", "Email ou password inválido");
         
         return UserResponseDTO.valueOf(user);
     }
 
     @Override
-    public UserResponseDTO findByLogin(String login) {
-        User user = repository.findByLogin(login);
+    public UserResponseDTO findByEmail(String email) {
+        User user = repository.findByEmail(email);
         if (user == null) 
-            throw new ValidationException("login", "Login inválido");
+            throw new ValidationException("email", "Email inválido");
         
         return UserResponseDTO.valueOf(user);
     }

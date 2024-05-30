@@ -15,12 +15,13 @@ import jakarta.persistence.Table;
 public class User extends DefaultEntity {
 
     private String name;
-    private String login;
+    private String email;
     private String password;
+    private String cpf;
     //@Enumerated(EnumType.ORDINAL)
     private Profile profile;
 
-    private String nameImagem;
+    private String imageName;
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -35,12 +36,12 @@ public class User extends DefaultEntity {
         this.name = name;
     }
 
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -49,6 +50,14 @@ public class User extends DefaultEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public List<Phone> getListaPhone() {
@@ -67,11 +76,12 @@ public class User extends DefaultEntity {
         this.profile = profile;
     }
 
-    public String getNameImagem() {
-        return nameImagem;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setNameImagem(String nameImagem) {
-        this.nameImagem = nameImagem;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
+    
 }

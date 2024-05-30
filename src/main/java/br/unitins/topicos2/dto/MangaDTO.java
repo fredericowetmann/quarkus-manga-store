@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record MangaDTO (
     
-    @NotBlank(message = "O nome não pode ser nulo")
+    @NotBlank(message = "O nome não pode ser vazio")
     String name,
     String description,
     @NotNull(message = "O preço não pode ser nulo")

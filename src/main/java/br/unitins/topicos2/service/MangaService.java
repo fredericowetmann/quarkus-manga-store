@@ -12,7 +12,7 @@ public interface MangaService {
 
     MangaResponseDTO update(Long id, MangaDTO dto);
 
-    MangaResponseDTO insertImage(Long id,String name);
+    MangaResponseDTO insertImage(Long id, String name);
 
     void delete(Long id);
 

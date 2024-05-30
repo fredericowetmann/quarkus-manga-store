@@ -7,8 +7,7 @@ import br.unitins.topicos2.dto.OrderResponseDTO;
 
 public interface OrderService {
 
-        public OrderResponseDTO insert(OrderDTO dto, String login);
-        public OrderResponseDTO findById(Long id);
-        public List<OrderResponseDTO> getAll(int page, int pageSize);
-        public List<OrderResponseDTO> findByAll(String login);
+        OrderResponseDTO insert(OrderDTO dto, String login);
+        OrderResponseDTO findById(Long id);
+        List<OrderResponseDTO> findByLogin(String login);
 }

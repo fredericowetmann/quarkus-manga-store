@@ -15,9 +15,9 @@ public class UserRepository implements PanacheRepository<User>{
         return find("UPPER(name) LIKE ?1 ", "%" + name.toUpperCase() + "%");
     }
 
-    public User findByLogin(String login) {
+    public User findByEmail(String email) {
         try {
-            return find("login = ?1 ", login ).singleResult();
+            return find("email = ?1 ", email ).singleResult();
         } catch (NoResultException e) {
             e.printStackTrace();
             return null;
@@ -25,13 +25,17 @@ public class UserRepository implements PanacheRepository<User>{
         
     }
 
-    public User findByLoginAndPassword(String login, String password) {
+    public User findByEmailAndPassword(String email, String password) {
         try {
-            return find("login = ?1 AND password = ?2 ", login, password).singleResult();
+            return find("email = ?1 AND password = ?2 ", email, password).singleResult();
         } catch (NoResultException e) {
             e.printStackTrace();
             return null;
         }
         
+    }
+
+    public boolean existsByEmail(String email) {
+        return find("email", email).count() > 0;
     }
 }

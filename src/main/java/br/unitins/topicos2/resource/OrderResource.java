@@ -9,12 +9,10 @@ import br.unitins.topicos2.service.UserService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -34,7 +32,7 @@ public class OrderResource {
 
 
     @POST
-    @RolesAllowed({"User"})
+    @RolesAllowed({"User", "Admin"})
     public Response insert(OrderDTO dto) {
 
         String login = jwt.getSubject();
@@ -45,9 +43,8 @@ public class OrderResource {
 
     @GET
     @RolesAllowed({"User", "Admin"})
-    public Response findAll(@QueryParam("page") @DefaultValue("0") int page,
-    @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
-        
-        return Response.ok(service.getAll(page, pageSize)).build();
+    public Response findByUser() {
+        String login = jwt.getSubject();
+        return Response.ok(service.findByLogin(login)).build();
     }
 }

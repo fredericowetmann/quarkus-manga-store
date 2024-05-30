@@ -17,12 +17,12 @@ insert into city (`name`, id_state) values( 'Gurupi', 1);
 insert into city (`name`, id_state) values( 'Goiânia', 2);
 insert into city (`name`, id_state) values( 'Anápolis', 2);
 
-insert into users (`name`, login, `password`, `profile`) values('Usuario', 'user', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1);
-insert into users (`name`, login, `password`, `profile`) values('Administrador', 'admin', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2);
-insert into users (`name`, login, `password`, `profile`) values('Frederico Gomes', 'fredericowetmann', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1);
-insert into users (`name`, login, `password`, `profile`) values('João Antonio', 'boris_brother', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2);
-insert into users (`name`, login, `password`, `profile`) values('João Pedro Gomes', 'JPblack', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1);
-insert into users (`name`, login, `password`, `profile`) values('Alex Recorde de Faltas', 'talimos', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2);
+insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('Usuario', 'user', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1, '4ea1e789-2110-479d-950a-433ba506e787.png');
+insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('Administrador', 'admin', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2, 'f0005695-7c3b-4ff6-a424-6b4c24b27b10.png');
+insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('Frederico Gomes', 'fredericowetmann', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1, '7e63485f-1dff-4efd-a9dd-b60f3f30591e.png');
+insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('João Antonio', 'boris_brother', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2, '36ca6d3a-e47b-49b9-bda3-c6858e1aba11.jpeg');
+insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('João Pedro Gomes', 'JPblack', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1, 'eb0b8d87-9fe7-456f-af05-b5333c908841.png');
+insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('Alex Recorde de Faltas', 'talimos', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2, '008a45c0-1222-4894-8261-bd6e50a0d6d9.png');
 
 insert into phone (areaCode, `number`) values('63', '98434-6823');
 insert into phone (areaCode, `number`) values('62', '7834-2386');

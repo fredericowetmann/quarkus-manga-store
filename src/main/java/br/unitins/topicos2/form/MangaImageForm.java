@@ -9,27 +9,27 @@ public class MangaImageForm {
     @FormParam("idManga")
     private Long id;
 
-    @FormParam("nomeImagem")
-    private String nomeImagem;
+    @FormParam("imageName")
+    private String imageName;
 
-    @FormParam("imagem")
+    @FormParam("image")
     @PartType("application/octet-stream")
-    private byte[] imagem;
+    private byte[] image;
 
-    public String getNomeImagem() {
-        return nomeImagem;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setNomeImagem(String nomeImagem) {
-        this.nomeImagem = nomeImagem;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
-    public byte[] getImagem() {
-        return imagem;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public Long getId() {

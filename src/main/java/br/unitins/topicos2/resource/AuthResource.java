@@ -33,8 +33,8 @@ public class AuthResource {
     private static final Logger LOG = Logger.getLogger(AuthResource.class);
 
     @POST
-    public Response login(@Valid LoginDTO dto) {
-        LOG.infof("Iniciando a autenticacao do %s", dto.login());
+    public Response email(@Valid LoginDTO dto) {
+        LOG.infof("Iniciando a autenticacao do %s", dto.email());
 
         String hashPassword = hashService.getHashPassword(dto.password());
 
@@ -42,12 +42,12 @@ public class AuthResource {
 
         LOG.debug(hashPassword);
 
-        UserResponseDTO result = service.findByLoginAndPassword(dto.login(), hashPassword);
+        UserResponseDTO result = service.findByEmailAndPassword(dto.email(), hashPassword);
 
         if (result != null)
-            LOG.info("Login e senha corretos.");
+            LOG.info("Email e senha corretos.");
         else
-            LOG.info("Login e senha incorretos.");
+            LOG.info("Email e senha incorretos.");
         
         return Response.ok(result)
             .header("Authorization", jwtService.generateJwt(result))

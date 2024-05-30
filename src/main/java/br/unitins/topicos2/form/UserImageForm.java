@@ -6,29 +6,27 @@ import jakarta.ws.rs.FormParam;
 
 public class UserImageForm {
 
-    @FormParam("nameImagem")
-    private String nameImagem;
+    @FormParam("imageName")
+    private String imageName;
 
-    @FormParam("imagem")
+    @FormParam("image")
     @PartType("application/octet-stream")
-    private byte[] imagem;
+    private byte[] image;
 
-    public String getNameImagem() {
-        return nameImagem;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setNameImagem(String nameImagem) {
-        this.nameImagem = nameImagem;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
-    public byte[] getImagem() {
-        return imagem;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
-    
-    
 }
