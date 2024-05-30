@@ -12,6 +12,8 @@ public interface CollectionService {
 
     void delete(long id);
 
+    CollectionResponseDTO insertImage(Long id, String name);
+
     CollectionResponseDTO findById(long id);
 
     List<CollectionResponseDTO> findByName(String name);

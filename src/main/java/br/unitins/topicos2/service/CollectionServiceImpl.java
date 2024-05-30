@@ -54,6 +54,19 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
+    @Transactional
+    public CollectionResponseDTO insertImage(Long id, String name){
+        if(repository.findById(id) == null){
+            throw new NotFoundException("Produto não encontrado");
+        }
+
+        Collection collection = repository.findById(id);
+        collection.setImageName(name);
+
+        return CollectionResponseDTO.valueOf(collection);
+    }
+
+    @Override
     public CollectionResponseDTO findById(long id) {
         if(repository.findById(id) == null){
             throw new NotFoundException("Coleção não encontrada");
