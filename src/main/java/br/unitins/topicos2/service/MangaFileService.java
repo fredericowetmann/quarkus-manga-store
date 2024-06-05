@@ -4,13 +4,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import br.unitins.topicos2.model.Manga;
+import br.unitins.topicos2.repository.MangaRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import br.unitins.topicos2.validation.ValidationException;
 
 @ApplicationScoped
 public class MangaFileService implements FileService {
@@ -21,52 +24,64 @@ public class MangaFileService implements FileService {
         + File.separator + "images"
         + File.separator + "manga" + File.separator;
 
-        private static final List<String> SUPPORTED_MIME_TYPES = Arrays.asList("image/jpeg", "image/jpg", "image/png", "image/gif");
-
-        private static final int MAX_FILE_SIZE = 1024 * 1024 * 10; // 10mb 
+        @Inject
+        MangaRepository mangaRepository;
     
         @Override
-        public String save(String fileName, byte[] file) throws IOException {
-            verifyImageSize(file);
-            verifyImageType(fileName);
+        @Transactional
+        public void save(Long id, String nomeImagem, byte[] imagem) {
+            Manga manga = mangaRepository.findById(id);
     
-            Path directory = createDirectoryIfNotExists(PATH_USER);
-            String newFileName = generateUniqueFileName(fileName);
-    
-            Path filePath = directory.resolve(newFileName);
-            saveFile(file, filePath);
-    
-            return filePath.toFile().getName();
+            try {
+                String novoNomeImagem = salvarImagem(imagem, nomeImagem);
+                manga.setImageName(novoNomeImagem);
+                // excluir a imagem antiga (trabalho pra quem????)
+            } catch (IOException e) {
+                throw new ValidationException("imagem", e.toString());
+            }
         }
     
-        private void saveFile(byte[] file, Path filePath) throws IOException {
-            if (Files.exists(filePath)) {
+        private String salvarImagem(byte[] imagem, String nomeImagem) throws IOException {
         
+            // verificando o tipo da imagem
+            String mimeType = Files.probeContentType(new File(nomeImagem).toPath());
+            List<String> listMimeType = Arrays.asList("image/jpg", "image/jpeg", "image/png", "image/gif");
+            if (!listMimeType.contains(mimeType)) {
+                throw new IOException("Tipo de imagem não suportada.");
             }
     
-            try (FileOutputStream fos = new FileOutputStream(filePath.toFile())) {
-                fos.write(file);
-            }
-        }
+            // verificando o tamanho do arquivo - nao permitir maior que 10 megas
+            if (imagem.length > (1024 * 1024 * 10))
+                throw new IOException("Arquivo muito grande.");
     
-        private Path createDirectoryIfNotExists(String path) throws IOException {
-            Path directory = Paths.get(path);
-            Files.createDirectories(directory);
-            return directory;
-        }
+            // criando as pastas quando não existir
+            File diretorio = new File(PATH_USER);
+            if (!diretorio.exists())
+                diretorio.mkdirs();
     
-        private String generateUniqueFileName(String fileName) throws IOException {
-            String mimeType = Files.probeContentType(Paths.get(fileName));
-            String extension = mimeType.substring(mimeType.lastIndexOf('/') + 1);
+            // gerando o nome do arquivo
+            String nomeArquivo = UUID.randomUUID()
+            +"."+mimeType.substring(mimeType.lastIndexOf("/")+1);
     
-            int counter = 1;
-            String uniqueFileName = UUID.randomUUID() + "." + extension;
+            String path = PATH_USER + nomeArquivo;
     
-            while (Files.exists(Paths.get(PATH_USER, uniqueFileName))) {
-                uniqueFileName = UUID.randomUUID() + "_" + counter++ + "." + extension;
-            }
-            
-            return uniqueFileName;
+            // salvando o arquivo
+            File file = new File(path);
+            // alunos (melhorar :)
+            if (file.exists())
+                throw new IOException("O nome gerado da imagem está repetido.");
+    
+            // criando um arquivo no S.O.
+            file.createNewFile();
+    
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(imagem);
+            // garantindo o envio do ultimo lote de bytes
+            fos.flush();
+            fos.close();
+    
+            return nomeArquivo;
+        
         }
     
         @Override
@@ -74,17 +89,4 @@ public class MangaFileService implements FileService {
             File file = new File(PATH_USER+fileName);
             return file;
         }
-    
-        private void verifyImageSize(byte[] file) throws IOException {
-            if (file.length > MAX_FILE_SIZE) 
-                throw new IOException("File maior que 10mb.");
-        }
-    
-        
-        private void verifyImageType(String fileName) throws IOException {
-            String mimeType = Files.probeContentType(Paths.get(fileName));
-            if (mimeType == null || !SUPPORTED_MIME_TYPES.contains(mimeType)) 
-                throw new IOException("Tipo de imagem não suportada.");
-        }
-    
 }

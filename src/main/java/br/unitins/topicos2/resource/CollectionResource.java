@@ -1,8 +1,7 @@
 package br.unitins.topicos2.resource;
 
 import br.unitins.topicos2.dto.CollectionDTO;
-import br.unitins.topicos2.dto.CollectionResponseDTO;
-import br.unitins.topicos2.form.CollectionImageForm;
+import br.unitins.topicos2.form.MangaImageForm;
 import br.unitins.topicos2.service.CollectionFileService;
 import br.unitins.topicos2.service.CollectionService;
 import jakarta.annotation.security.RolesAllowed;
@@ -24,8 +23,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.ResponseBuilder;
 import jakarta.ws.rs.core.Response.Status;
-
-import java.io.IOException;
 
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -93,36 +90,22 @@ public class CollectionResource {
 
     @PATCH
     @Path("/image/upload")
-    @RolesAllowed({"Admin"})
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response insertImage(@MultipartForm CollectionImageForm form){
-        //String imageName;
-        Long id = form.getId();
-        try{
-            LOG.infof("Inserindo imagem ao produto de id %s", id);
-            String imageName = fileService.save(form.getImageName(), form.getImage());
-            service.insertImage(id, imageName);
-            return Response.noContent().build();
-        } catch(IOException e){
-            LOG.error("Erro ao inserir imagem");
-            e.printStackTrace();
-            Error error = new Error("409", e.getMessage());
-            return Response.status(Status.CONFLICT).entity(error).build();
-        }
+    public Response salvarImagem(@MultipartForm MangaImageForm form) {
+        LOG.info("nome imagem: "+form.getImageName());
+        System.out.println("nome imagem: "+form.getImageName());
+        
+        fileService.save(form.getId(), form.getImageName(), form.getImage());
+        return Response.noContent().build();
     }
 
     @GET
-    @Path("/image/download/{id}")
+    @Path("/image/download/{imageName}")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    public Response downloadImage(@PathParam("id")Long id){
-
-        LOG.infof("Buscando imagem do usuario de id %s", id);
-        CollectionResponseDTO collection = service.findById(id);
-        String imageName = collection.imageName();
-
+    public Response downloadImage(@PathParam("imageName") String imageName){
+        LOG.infof(imageName);
         ResponseBuilder response = Response.ok(fileService.getFile(imageName));
-        response.header("Content-Disposition", "attachment;filename="+imageName);
+        response.header("Content-Disposition", "attachment;filename=" + imageName);
         return response.build();
     }
 

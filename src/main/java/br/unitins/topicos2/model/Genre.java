@@ -1,10 +1,12 @@
 package br.unitins.topicos2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class Genre extends DefaultEntity {
     private String name;
+    @Column(length = 2000)
     private String description;
 
     public String getName() {

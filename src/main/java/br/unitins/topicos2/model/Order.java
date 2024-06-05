@@ -1,6 +1,6 @@
 package br.unitins.topicos2.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -10,12 +10,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "orders")
 public class Order extends DefaultEntity {
 
-    private LocalDateTime dataHora;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHora;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -26,11 +29,11 @@ public class Order extends DefaultEntity {
 
     private Double totalOrder;
 
-    public LocalDateTime getDataHora() {
+    public Date getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(LocalDateTime dataHora) {
+    public void setDataHora(Date dataHora) {
         this.dataHora = dataHora;
     }
 

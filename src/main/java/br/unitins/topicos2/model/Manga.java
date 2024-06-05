@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 public class Manga extends DefaultEntity{
 
     private String name;
+    @Column(length = 1000)
     private String description;
     private Double price;
     private Integer numPages;

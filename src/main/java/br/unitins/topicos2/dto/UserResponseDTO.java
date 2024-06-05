@@ -11,7 +11,7 @@ public record UserResponseDTO(
     String email,
     String cpf,
     Profile profile,
-    String imagenamem,
+    String imageName,
     List<PhoneDTO> listaPhone
 ) { 
     public static UserResponseDTO valueOf(User user){

@@ -1,5 +1,6 @@
 package br.unitins.topicos2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -7,6 +8,7 @@ import jakarta.persistence.Table;
 @Table(name = "collections")
 public class Collection extends DefaultEntity {
     private String name;
+    @Column(length = 2000)
     private String description;
 
     private String imageName;

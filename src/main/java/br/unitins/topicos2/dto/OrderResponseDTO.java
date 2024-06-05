@@ -1,13 +1,13 @@
 package br.unitins.topicos2.dto;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import br.unitins.topicos2.model.Order;
 
 public record OrderResponseDTO(
     Long id,
-    LocalDateTime dataHora,
+    Date dataHora,
     UserResponseDTO user,
     Double totalOrder,
     List<ItemOrderResponseDTO> itens

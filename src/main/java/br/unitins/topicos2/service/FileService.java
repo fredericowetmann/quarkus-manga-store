@@ -1,11 +1,10 @@
 package br.unitins.topicos2.service;
 
 import java.io.File;
-import java.io.IOException;
 
 public interface FileService {
 
-    String save(String fileName, byte[] file) throws IOException;
+    void save(Long id, String nomeImagem, byte[] imagem);
 
     File getFile(String fileName);
     

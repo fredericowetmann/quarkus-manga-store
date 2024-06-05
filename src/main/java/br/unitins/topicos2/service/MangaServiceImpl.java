@@ -126,15 +126,28 @@ public class MangaServiceImpl implements MangaService{
     @Override
     public List<MangaResponseDTO> getAll(int page, int pageSize) {
         List<Manga> list = repository
-                                .findAll()
-                                .page(page, pageSize)
-                                .list();
-        if(repository.listAll().stream().map(e -> MangaResponseDTO.valueOf(e)).toList().isEmpty()){
+                            .find("order by id")
+                            .page(page, pageSize)
+                            .list();
+    
+        if (list.isEmpty()) {
             throw new NotFoundException("Nenhum produto para ser encontrado");
         }
-        
-        return list.stream().map(e -> MangaResponseDTO.valueOf(e)).collect(Collectors.toList());
-    }  
+        return list.stream().map(MangaResponseDTO::valueOf).collect(Collectors.toList());
+    }
+
+    // @Override
+    // public List<MangaResponseDTO> getAllRandom(int page, int pageSize) {
+    //     List<Manga> list = repository
+    //                         .find("order by RANDOM()")  // Aqui você usa a função RANDOM() para ordenar aleatoriamente
+    //                         .page(page, pageSize)
+    //                         .list();
+    
+    //     if (list.isEmpty()) {
+    //         throw new NotFoundException("Nenhum produto para ser encontrado");
+    //     }
+    //     return list.stream().map(MangaResponseDTO::valueOf).collect(Collectors.toList());
+    // }
 
     @Override
     public MangaResponseDTO findById(Long id) {
@@ -146,13 +159,14 @@ public class MangaServiceImpl implements MangaService{
     }
 
     @Override
-    public List<MangaResponseDTO> findByName(String name) {
+    public List<MangaResponseDTO> findByName(String name, int page, int pageSize) {
 
-        if(repository.findByName(name).stream().map(e -> MangaResponseDTO.valueOf(e)).toList().isEmpty()){
-            throw new NotFoundException("Nenhum produto encontrado");
+        List<Manga> list = repository.findByName(name).page(page, pageSize).list();
+
+        if (list.isEmpty()) {
+            throw new NotFoundException("Nenhum produto para ser encontrado");
         }
-
-        return repository.findByName(name).stream().map(e -> MangaResponseDTO.valueOf(e)).toList();
+        return list.stream().map(MangaResponseDTO::valueOf).collect(Collectors.toList());
     }
 
     @Override
@@ -176,26 +190,42 @@ public class MangaServiceImpl implements MangaService{
     }
 
     @Override
-    public List<MangaResponseDTO> findByCollection(String collectionName) {
+    public List<MangaResponseDTO> findByCollection(Long id, int page, int pageSize) {
+        List<Manga> list = repository.findByCollection(id).page(page, pageSize).list();
 
-        if(repository.findByCollection(collectionName).stream().map(e -> MangaResponseDTO.valueOf(e)).toList().isEmpty()){
-            throw new NotFoundException("Nenhum produto encontrado");
+        if (list.isEmpty()) {
+            throw new NotFoundException("Nenhum produto para ser encontrado");
         }
-
-        return repository.findByCollection(collectionName).stream().map(e -> MangaResponseDTO.valueOf(e)).toList();
+        return list.stream().map(MangaResponseDTO::valueOf).collect(Collectors.toList());
     }
 
     @Override
-    public List<MangaResponseDTO> findByGenre(Long id) {
-        if(repository.findByGenre(id).stream().map(e -> MangaResponseDTO.valueOf(e)).toList().isEmpty()){
-            throw new NotFoundException("Nenhum produto encontrado");
-        }
+    public List<MangaResponseDTO> findByGenre(Long id, int page, int pageSize) {
+        List<Manga> list = repository.findByGenre(id).page(page, pageSize).list();
 
-        return repository.findByGenre(id).stream().map(e -> MangaResponseDTO.valueOf(e)).toList();
+        if (list.isEmpty()) {
+            throw new NotFoundException("Nenhum produto para ser encontrado");
+        }
+        return list.stream().map(MangaResponseDTO::valueOf).collect(Collectors.toList());
     }
 
     @Override
     public long count() {
         return repository.count();
+    }
+
+    @Override
+    public long countByName(String name){
+        return repository.findByName(name).count();
+    }
+
+    @Override
+    public long countByGenre(Long genreId){
+        return repository.findByGenre(genreId).count();
+    }
+
+    @Override
+    public long countByCollection(Long id){
+        return repository.findByCollection(id).count();
     }
 }

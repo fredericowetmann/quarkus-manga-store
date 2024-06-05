@@ -18,7 +18,9 @@ public interface MangaService {
 
     List<MangaResponseDTO> getAll(int page, int pageSize);
 
-    List<MangaResponseDTO> findByName(String name);
+    // List<MangaResponseDTO> getAllRandom(int page, int pageSize);
+
+    List<MangaResponseDTO> findByName(String name, int page, int pageSize);
 
     MangaResponseDTO findById(Long id);
 
@@ -26,9 +28,15 @@ public interface MangaService {
 
     List<MangaResponseDTO> findByPublisher(String publisherName);
 
-    List<MangaResponseDTO> findByCollection(String collectionName);
+    List<MangaResponseDTO> findByCollection(Long id, int page, int pageSize);
     
-    List<MangaResponseDTO> findByGenre(Long id);
+    List<MangaResponseDTO> findByGenre(Long id, int page, int pageSize);
 
     long count();
+
+    long countByName(String name);
+
+    long countByGenre(Long genreId);
+
+    long countByCollection(Long id);
 }

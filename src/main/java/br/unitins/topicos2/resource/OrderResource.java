@@ -1,6 +1,7 @@
 package br.unitins.topicos2.resource;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
+import org.jboss.logging.Logger;
 
 import br.unitins.topicos2.dto.OrderDTO;
 import br.unitins.topicos2.dto.OrderResponseDTO;
@@ -30,9 +31,9 @@ public class OrderResource {
     @Inject
     JsonWebToken jwt;
 
-
     @POST
     @RolesAllowed({"User", "Admin"})
+    @Path("/insert")
     public Response insert(OrderDTO dto) {
 
         String login = jwt.getSubject();
@@ -43,8 +44,15 @@ public class OrderResource {
 
     @GET
     @RolesAllowed({"User", "Admin"})
+    @Path("/{token}")
     public Response findByUser() {
         String login = jwt.getSubject();
         return Response.ok(service.findByLogin(login)).build();
+    }
+    
+    @GET
+    @RolesAllowed({"User", "Admin"})
+    public Response findAll() {
+        return Response.ok(service.findAll()).build();
     }
 }

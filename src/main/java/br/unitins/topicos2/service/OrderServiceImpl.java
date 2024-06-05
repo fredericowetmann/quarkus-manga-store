@@ -1,9 +1,10 @@
 package br.unitins.topicos2.service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import br.unitins.topicos2.dto.GenreResponseDTO;
 import br.unitins.topicos2.dto.ItemOrderDTO;
 import br.unitins.topicos2.dto.OrderDTO;
 import br.unitins.topicos2.dto.OrderResponseDTO;
@@ -50,12 +51,8 @@ public class OrderServiceImpl implements OrderService {
         }
         User user = userRepository.findByEmail(email);
 
-        /* if(user.getPhysicalPerson() == null || user.getPhysicalPerson().getCpf() == null || user.getPhysicalPerson().getName() == null){
-            throw new ValidationException("400", "Seu perfil de usuario não está completo");
-        } */
-
         Order pedido = new Order();
-        pedido.setDataHora(LocalDateTime.now());
+        pedido.setDataHora(new Date());
 
         Double total = 0.0;
 
@@ -83,12 +80,13 @@ public class OrderServiceImpl implements OrderService {
 
         //pedido.setPayment(new Payment(total));
 
-        pedido.setUser(userRepository.findByEmail(email));
+        pedido.setUser(user);
 
         orderRepository.persist(pedido);
 
         return OrderResponseDTO.valueOf(pedido); 
     }
+    
 
     // @Override
     // public void finishPayment(Long idOrder) throws NullPointerException {
@@ -169,6 +167,10 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderResponseDTO> findByLogin(String login) {
         return orderRepository.findByLogin(login).stream()
             .map(e -> OrderResponseDTO.valueOf(e)).toList();
+    }
+
+    public List<OrderResponseDTO> findAll() {
+        return orderRepository.listAll().stream().map(e -> OrderResponseDTO.valueOf(e)).toList();
     }
     
 }

@@ -10,4 +10,5 @@ public interface OrderService {
         OrderResponseDTO insert(OrderDTO dto, String login);
         OrderResponseDTO findById(Long id);
         List<OrderResponseDTO> findByLogin(String login);
+        List<OrderResponseDTO> findAll();
 }
