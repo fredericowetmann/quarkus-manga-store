@@ -1,16 +1,15 @@
 package br.unitins.topicos2.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.unitins.topicos2.dto.PhoneDTO;
+import br.unitins.topicos2.dto.UpdatePasswordDTO;
+import br.unitins.topicos2.dto.UpdateUserDTO;
 import br.unitins.topicos2.dto.UserBasicDTO;
 import br.unitins.topicos2.dto.UserBasicResponseDTO;
 import br.unitins.topicos2.dto.UserDTO;
 import br.unitins.topicos2.dto.UserResponseDTO;
 import br.unitins.topicos2.model.Profile;
-import br.unitins.topicos2.model.Phone;
 import br.unitins.topicos2.model.User;
 import br.unitins.topicos2.repository.UserRepository;
 import br.unitins.topicos2.validation.ValidationException;
@@ -43,17 +42,6 @@ public class UserServiceImpl implements UserService {
         novoUser.setCpf(dto.cpf());
         novoUser.setPassword(hashService.getHashPassword(dto.password()));
         novoUser.setProfile(Profile.valueOf(dto.idProfile()));
-
-        if (dto.listaPhone() != null && 
-                    !dto.listaPhone().isEmpty()){
-            novoUser.setListaPhone(new ArrayList<Phone>());
-            for (PhoneDTO tel : dto.listaPhone()) {
-                Phone phone = new Phone();
-                phone.setAreaCode(tel.areaCode());
-                phone.setNumber(tel.number());
-                novoUser.getListaPhone().add(phone);
-            }
-        }
 
         repository.persist(novoUser);
 
@@ -96,19 +84,44 @@ public class UserServiceImpl implements UserService {
         user.setPassword(dto.password());
         user.setCpf(dto.cpf());
 
-        // Atualiza os telefones do usuário
-    if (dto.listaPhone() != null && !dto.listaPhone().isEmpty()) {
-        user.getListaPhone().clear(); // Limpa a lista de telefones existente
-
-        for (PhoneDTO tel : dto.listaPhone()) {
-            Phone phone = new Phone();
-            phone.setAreaCode(tel.areaCode());
-            phone.setNumber(tel.number());
-            user.getListaPhone().add(phone);
-        }
-    }
-        
         return UserResponseDTO.valueOf(user);
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(Long userId, UpdateUserDTO updateUserDTO) {
+        User user = repository.findById(userId);
+
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+
+        user.setName(updateUserDTO.name());
+        user.setEmail(updateUserDTO.email());
+        user.setCpf(updateUserDTO.cpf());
+
+        repository.persist(user);
+    }
+
+    @Override
+    @Transactional
+    public void updatePassword(Long userId, UpdatePasswordDTO updatePasswordDTO) {
+        User user = repository.findById(userId);
+
+        if (user == null) {
+            throw new RuntimeException("Usuario não foi encontrado");
+        }
+
+        String currentHashedPassword = hashService.getHashPassword(updatePasswordDTO.oldPassword());
+
+        if (!currentHashedPassword.equals(user.getPassword())) {
+            throw new RuntimeException("Senha antiga está incorreta!");
+        }
+
+        String newHashedPassword = hashService.getHashPassword(updatePasswordDTO.newPassword());
+        user.setPassword(newHashedPassword);
+
+        repository.persist(user);
     }
 
     @Override

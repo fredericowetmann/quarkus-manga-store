@@ -149,7 +149,7 @@ public class MangaResource {
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({ "User", "Admin" })
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando produto de id %s", id); 

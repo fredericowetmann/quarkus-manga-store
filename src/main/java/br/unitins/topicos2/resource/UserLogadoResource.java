@@ -7,12 +7,15 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import br.unitins.topicos2.form.MangaImageForm;
 import br.unitins.topicos2.service.UserFileService;
 import br.unitins.topicos2.service.UserService;
+import br.unitins.topicos2.dto.UpdatePasswordDTO;
+import br.unitins.topicos2.dto.UpdateUserDTO;
 import br.unitins.topicos2.dto.UserResponseDTO;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -35,6 +38,23 @@ public class UserLogadoResource {
 
     @Inject
     UserFileService fileService;
+
+
+    @PATCH
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateUser(@PathParam("id") Long id, UpdateUserDTO updateUserDTO) {
+        userService.updateUser(id, updateUserDTO);
+        return Response.ok().build();
+    }
+
+    @PATCH
+    @Path("/{id}/password")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updatePassword(@PathParam("id") Long id, UpdatePasswordDTO updatePasswordDTO) {
+        userService.updatePassword(id, updatePasswordDTO);
+        return Response.ok().build();
+    }
 
     @GET
     @RolesAllowed({ "User", "Admin" })

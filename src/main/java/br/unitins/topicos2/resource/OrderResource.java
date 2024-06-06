@@ -13,6 +13,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -43,15 +44,22 @@ public class OrderResource {
     }
 
     @GET
+    @Path("/user/{id}")
     @RolesAllowed({"User", "Admin"})
-    @Path("/{token}")
-    public Response findByUser() {
-        String login = jwt.getSubject();
-        return Response.ok(service.findByLogin(login)).build();
+    public Response findByUser(@PathParam("id")Long id) {
+        return Response.ok(service.findByUserId(id)).build();
+    }
+
+    @GET
+    @Path("/orders/{id}")
+    @RolesAllowed({"User", "Admin"})
+    public Response findByOrdersId(@PathParam("id")Long id) {
+        return Response.ok(service.findByOrderId(id)).build();
     }
     
     @GET
     @RolesAllowed({"User", "Admin"})
+    @Path("/all")
     public Response findAll() {
         return Response.ok(service.findAll()).build();
     }

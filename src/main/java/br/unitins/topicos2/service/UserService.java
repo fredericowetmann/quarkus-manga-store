@@ -2,6 +2,8 @@ package br.unitins.topicos2.service;
 
 import java.util.List;
 
+import br.unitins.topicos2.dto.UpdatePasswordDTO;
+import br.unitins.topicos2.dto.UpdateUserDTO;
 import br.unitins.topicos2.dto.UserBasicDTO;
 import br.unitins.topicos2.dto.UserBasicResponseDTO;
 import br.unitins.topicos2.dto.UserDTO;
@@ -15,6 +17,10 @@ public interface UserService {
     UserBasicResponseDTO insertBasicUser(UserBasicDTO dto);
 
     UserResponseDTO update(UserDTO dto, Long id);
+
+    void updateUser(Long userId, UpdateUserDTO updateUserDTO);
+
+    void updatePassword(Long userId, UpdatePasswordDTO updatePasswordDTO);
 
     UserResponseDTO updateImageName(Long id, String imageName);
 

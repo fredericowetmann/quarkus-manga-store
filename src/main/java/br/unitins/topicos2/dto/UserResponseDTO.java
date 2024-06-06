@@ -1,7 +1,5 @@
 package br.unitins.topicos2.dto;
 
-import java.util.List;
-
 import br.unitins.topicos2.model.Profile;
 import br.unitins.topicos2.model.User;
 
@@ -11,8 +9,7 @@ public record UserResponseDTO(
     String email,
     String cpf,
     Profile profile,
-    String imageName,
-    List<PhoneDTO> listaPhone
+    String imageName
 ) { 
     public static UserResponseDTO valueOf(User user){
 
@@ -22,10 +19,7 @@ public record UserResponseDTO(
             user.getEmail(),
             user.getCpf(),
             user.getProfile(),
-            user.getImageName(),
-            user.getListaPhone()
-                .stream()
-                .map(t -> PhoneDTO.valueOf(t)).toList()
+            user.getImageName()
         );
     }
 }

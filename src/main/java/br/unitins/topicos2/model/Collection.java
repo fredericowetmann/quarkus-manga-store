@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 @Table(name = "collections")
 public class Collection extends DefaultEntity {
     private String name;
-    @Column(length = 2000)
+    @Column(length = 3000)
     private String description;
 
     private String imageName;

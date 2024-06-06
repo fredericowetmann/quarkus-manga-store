@@ -1,13 +1,6 @@
 package br.unitins.topicos2.model;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,11 +15,6 @@ public class User extends DefaultEntity {
     private Profile profile;
 
     private String imageName;
-
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinTable(name = "user_phone", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_phone"))
-    private List<Phone> listaPhone;
 
     public String getName() {
         return name;
@@ -58,14 +46,6 @@ public class User extends DefaultEntity {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public List<Phone> getListaPhone() {
-        return listaPhone;
-    }
-
-    public void setListaPhone(List<Phone> listaPhone) {
-        this.listaPhone = listaPhone;
     }
 
     public Profile getProfile() {

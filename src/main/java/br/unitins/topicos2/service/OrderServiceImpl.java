@@ -8,6 +8,7 @@ import br.unitins.topicos2.dto.GenreResponseDTO;
 import br.unitins.topicos2.dto.ItemOrderDTO;
 import br.unitins.topicos2.dto.OrderDTO;
 import br.unitins.topicos2.dto.OrderResponseDTO;
+import br.unitins.topicos2.dto.UserResponseDTO;
 import br.unitins.topicos2.model.ItemOrder;
 import br.unitins.topicos2.model.Manga;
 import br.unitins.topicos2.model.Order;
@@ -159,8 +160,14 @@ public class OrderServiceImpl implements OrderService {
     // }
 
     @Override
-    public OrderResponseDTO findById(Long id) {
+    public OrderResponseDTO findByOrderId(Long id) {
         return OrderResponseDTO.valueOf(orderRepository.findById(id));
+    }
+
+    @Override
+    public List<OrderResponseDTO> findByUserId(Long id) {
+        User user = userRepository.findById(id);
+        return orderRepository.findAll(user.getId()).stream().map(e -> OrderResponseDTO.valueOf(e)).toList();
     }
 
     @Override
