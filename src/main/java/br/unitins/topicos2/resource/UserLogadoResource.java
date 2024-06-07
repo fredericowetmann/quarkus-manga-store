@@ -40,16 +40,16 @@ public class UserLogadoResource {
     UserFileService fileService;
 
 
-    @PATCH
+    @PUT
     @RolesAllowed({ "User", "Admin" })
-    @Path("/{id}")
+    @Path("/{id}/update")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateUser(@PathParam("id") Long id, UpdateUserDTO updateUserDTO) {
         userService.updateUser(id, updateUserDTO);
         return Response.ok().build();
     }
 
-    @PATCH
+    @PUT
     @RolesAllowed({ "User", "Admin" })
     @Path("/{id}/password")
     @Consumes(MediaType.APPLICATION_JSON)
