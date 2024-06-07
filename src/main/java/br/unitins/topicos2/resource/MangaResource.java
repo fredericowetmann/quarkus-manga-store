@@ -81,6 +81,7 @@ public class MangaResource {
     @PATCH
     @Path("/image/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @RolesAllowed({"Admin"})
     public Response salvarImagem(@MultipartForm MangaImageForm form) {
         LOG.info("nome imagem: "+form.getImageName());
         System.out.println("nome imagem: "+form.getImageName());
@@ -93,7 +94,6 @@ public class MangaResource {
     @Path("/image/download/{imageName}")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response downloadImage(@PathParam("imageName") String imageName){
-        LOG.infof(imageName);
         ResponseBuilder response = Response.ok(fileService.getFile(imageName));
         response.header("Content-Disposition", "attachment;filename=" + imageName);
         return response.build();
@@ -117,7 +117,6 @@ public class MangaResource {
     }
 
     @GET
-    @RolesAllowed({ "User", "Admin" })
     public Response findAll(@QueryParam("page") @DefaultValue("0") int page,
     @QueryParam("pageSize") @DefaultValue("100") int pageSize){
         try{
@@ -149,7 +148,6 @@ public class MangaResource {
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({ "User", "Admin" })
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando produto de id %s", id); 
@@ -164,7 +162,6 @@ public class MangaResource {
 
     @GET
     @Path("/search/name/{name}")
-    @RolesAllowed({ "User", "Admin" })
     public Response findByName(@PathParam("name") String name, @QueryParam("page") @DefaultValue("0") int page,
     @QueryParam("pageSize") @DefaultValue("100") int pageSize){
 
@@ -181,7 +178,6 @@ public class MangaResource {
 
     @GET
     @Path("/search/authorName/{authorName}")
-    @RolesAllowed({ "User", "Admin" })
     public Response findByAuthor(@PathParam("authorName") String authorName){
 
         try{
@@ -197,7 +193,6 @@ public class MangaResource {
 
     @GET
     @Path("/search/publisherName/{publisherName}")
-    @RolesAllowed({ "User", "Admin" })
     public Response findByPublisher(@PathParam("publisherName") String publisherName){
 
         try{
@@ -213,7 +208,6 @@ public class MangaResource {
 
     @GET
     @Path("/search/colecao/{id}")
-    @RolesAllowed({ "User", "Admin" })
     public Response findByCollection(@PathParam("id") Long id, @QueryParam("page") @DefaultValue("0") int page,
     @QueryParam("pageSize") @DefaultValue("100") int pageSize){
 
@@ -230,7 +224,6 @@ public class MangaResource {
 
     @GET
     @Path("/search/genero/{id}")
-    @RolesAllowed({ "User", "Admin" })
     public Response findByGenreId(@PathParam("id") Long id, @QueryParam("page") @DefaultValue("0") int page,
     @QueryParam("pageSize") @DefaultValue("100") int pageSize){
         try{

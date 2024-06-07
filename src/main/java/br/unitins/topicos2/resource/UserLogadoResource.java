@@ -41,6 +41,7 @@ public class UserLogadoResource {
 
 
     @PATCH
+    @RolesAllowed({ "User", "Admin" })
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateUser(@PathParam("id") Long id, UpdateUserDTO updateUserDTO) {
@@ -49,6 +50,7 @@ public class UserLogadoResource {
     }
 
     @PATCH
+    @RolesAllowed({ "User", "Admin" })
     @Path("/{id}/password")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updatePassword(@PathParam("id") Long id, UpdatePasswordDTO updatePasswordDTO) {
