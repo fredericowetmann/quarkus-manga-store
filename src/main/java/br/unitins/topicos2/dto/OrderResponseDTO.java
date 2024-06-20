@@ -4,13 +4,16 @@ import java.util.Date;
 import java.util.List;
 
 import br.unitins.topicos2.model.Order;
+import br.unitins.topicos2.model.PaymentStatus;
 
 public record OrderResponseDTO(
     Long id,
     Date dataHora,
     UserResponseDTO user,
     Double totalOrder,
-    List<ItemOrderResponseDTO> itens
+    List<ItemOrderResponseDTO> itens,
+    PaymentResponseDTO payment,
+    PaymentStatus paymentStatus
 ) { 
     public static OrderResponseDTO valueOf(Order order){
         return new OrderResponseDTO(
@@ -18,6 +21,9 @@ public record OrderResponseDTO(
             order.getDataHora(),
             UserResponseDTO.valueOf(order.getUser()),
             order.getTotalOrder(),
-            ItemOrderResponseDTO.valueOf(order.getItens()));
+            ItemOrderResponseDTO.valueOf(order.getItens()),
+            PaymentResponseDTO.valueOf(order.getPayment()),
+            order.getPaymentStatus()
+        );
     }
 }

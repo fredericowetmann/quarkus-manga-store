@@ -6,6 +6,10 @@ import jakarta.ws.rs.FormParam;
 
 public class UserImageForm {
 
+    @FormParam("id")
+    @PartType("text/plain")
+    private Long id;
+
     @FormParam("imageName")
     private String imageName;
 
@@ -29,4 +33,12 @@ public class UserImageForm {
         this.image = image;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
 }

@@ -79,7 +79,7 @@ public class MangaResource {
     }
 
     @PATCH
-    @Path("/image/upload")
+    @Path("/image/upload/")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @RolesAllowed({"Admin"})
     public Response salvarImagem(@MultipartForm MangaImageForm form) {
@@ -130,21 +130,21 @@ public class MangaResource {
         }
     }
 
-    // @GET
-    // @Path("/random")
-    // @RolesAllowed({ "User", "Admin" })
-    // public Response findAllRandom(@QueryParam("page") @DefaultValue("0") int page,
-    // @QueryParam("pageSize") @DefaultValue("100") int pageSize){
-    //     try{
-    //         LOG.info("Buscando todos os produtos");
-    //         return Response.ok(service.getAllRandom(page, pageSize)).build();
-    //     }catch(Exception e){
-    //         LOG.error("Produtos não encontrados");
-    //         e.printStackTrace();
-    //         Error error = new Error("400", e.getMessage());
-    //         return Response.status(Status.BAD_REQUEST).entity(error).build();
-    //     }
-    // }
+    @GET
+    @Path("/random")
+    @RolesAllowed({ "User", "Admin" })
+    public Response findAllRandom(@QueryParam("page") @DefaultValue("0") int page,
+    @QueryParam("pageSize") @DefaultValue("100") int pageSize){
+        try{
+            LOG.info("Buscando todos os produtos");
+            return Response.ok(service.getAllRandom(page, pageSize)).build();
+        }catch(Exception e){
+            LOG.error("Produtos não encontrados");
+            e.printStackTrace();
+            Error error = new Error("400", e.getMessage());
+            return Response.status(Status.BAD_REQUEST).entity(error).build();
+        }
+    }
 
     @GET
     @Path("/{id}")

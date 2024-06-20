@@ -18,7 +18,7 @@ public interface MangaService {
 
     List<MangaResponseDTO> getAll(int page, int pageSize);
 
-    // List<MangaResponseDTO> getAllRandom(int page, int pageSize);
+    List<MangaResponseDTO> getAllRandom(int page, int pageSize);
 
     List<MangaResponseDTO> findByName(String name, int page, int pageSize);
 

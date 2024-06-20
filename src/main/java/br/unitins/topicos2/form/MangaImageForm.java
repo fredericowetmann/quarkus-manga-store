@@ -6,7 +6,8 @@ import jakarta.ws.rs.FormParam;
 
 public class MangaImageForm {
 
-    @FormParam("idManga")
+    @FormParam("id")
+    @PartType("text/plain")
     private Long id;
 
     @FormParam("imageName")
@@ -40,5 +41,6 @@ public class MangaImageForm {
         this.id = id;
     }
 
+    
     
 }

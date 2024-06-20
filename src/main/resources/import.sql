@@ -17,16 +17,19 @@ insert into city (`name`, id_state) values('Gurupi', 1);
 insert into city (`name`, id_state) values('Goiânia', 2);
 insert into city (`name`, id_state) values('Anápolis', 2);
 
-insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('Usuario', 'user@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1, '4ea1e789-2110-479d-950a-433ba506e787.png');
-insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('Administrador', 'admin@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2, 'f0005695-7c3b-4ff6-a424-6b4c24b27b10.png');
-insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('Frederico Gomes', 'fredericowetmann@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1, '7e63485f-1dff-4efd-a9dd-b60f3f30591e.png');
-insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('João Antonio', 'boris_brother@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2, '36ca6d3a-e47b-49b9-bda3-c6858e1aba11.jpeg');
-insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('João Pedro Gomes', 'JPblack@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1, 'eb0b8d87-9fe7-456f-af05-b5333c908841.png');
-insert into users (`name`, email, cpf, `password`, `profile`, imageName) values('Alex Recorde de Faltas', 'talimos@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2, '008a45c0-1222-4894-8261-bd6e50a0d6d9.png');
-
 insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Casa', '0000000', 'Avenida 5 casa 5', 'Em frente ao bar do zé', 1);
 insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Trabalho', '11111111', 'Rua almeida, predio 12', 'sede tal', 1);
 insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Casa', '55555440', 'Avenida santa hora ap 22b', 'condominio tal', 1);
+insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Casa', '0000000', 'Avenida 5 casa 5', 'Em frente ao bar do zé', 1);
+insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Trabalho', '11111111', 'Rua almeida, predio 12', 'sede tal', 1);
+insert into address_table (`name`, postalCode, `address`, complement, id_city) values('Casa', '55555440', 'Avenida santa hora ap 22b', 'condominio tal', 1);
+
+insert into users (`name`, email, cpf, `password`, `profile`, imageName, id_address) values('Usuario', 'user@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1, '4ea1e789-2110-479d-950a-433ba506e787.png', 1);
+insert into users (`name`, email, cpf, `password`, `profile`, imageName, id_address) values('Administrador', 'admin@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2, 'f0005695-7c3b-4ff6-a424-6b4c24b27b10.png', 2);
+insert into users (`name`, email, cpf, `password`, `profile`, imageName, id_address) values('Frederico Gomes', 'fredericowetmann@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1, '7e63485f-1dff-4efd-a9dd-b60f3f30591e.png', 3);
+insert into users (`name`, email, cpf, `password`, `profile`, imageName, id_address) values('João Antonio', 'boris_brother@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2, '36ca6d3a-e47b-49b9-bda3-c6858e1aba11.jpeg', 4);
+insert into users (`name`, email, cpf, `password`, `profile`, imageName, id_address) values('João Pedro Gomes', 'JPblack@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 1, 'eb0b8d87-9fe7-456f-af05-b5333c908841.png', 5);
+insert into users (`name`, email, cpf, `password`, `profile`, imageName, id_address) values('Alex Recorde de Faltas', 'talimos@gmail.com', '11111111103', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 2, '008a45c0-1222-4894-8261-bd6e50a0d6d9.png', 6);
 
 insert into author (`name`) values('Rifujin na Magonote');
 insert into author (`name`) values('Natsume Akatsuki');

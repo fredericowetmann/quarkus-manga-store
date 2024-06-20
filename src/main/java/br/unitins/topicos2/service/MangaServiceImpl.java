@@ -136,18 +136,18 @@ public class MangaServiceImpl implements MangaService{
         return list.stream().map(MangaResponseDTO::valueOf).collect(Collectors.toList());
     }
 
-    // @Override
-    // public List<MangaResponseDTO> getAllRandom(int page, int pageSize) {
-    //     List<Manga> list = repository
-    //                         .find("order by RANDOM()")  // Aqui você usa a função RANDOM() para ordenar aleatoriamente
-    //                         .page(page, pageSize)
-    //                         .list();
+     @Override
+     public List<MangaResponseDTO> getAllRandom(int page, int pageSize) {
+         List<Manga> list = repository
+                             .find("order by RANDOM()")  // Aqui você usa a função RANDOM() para ordenar aleatoriamente
+                             .page(page, pageSize)
+                             .list();
     
-    //     if (list.isEmpty()) {
-    //         throw new NotFoundException("Nenhum produto para ser encontrado");
-    //     }
-    //     return list.stream().map(MangaResponseDTO::valueOf).collect(Collectors.toList());
-    // }
+         if (list.isEmpty()) {
+             throw new NotFoundException("Nenhum produto para ser encontrado");
+         }
+         return list.stream().map(MangaResponseDTO::valueOf).collect(Collectors.toList());
+     }
 
     @Override
     public MangaResponseDTO findById(Long id) {

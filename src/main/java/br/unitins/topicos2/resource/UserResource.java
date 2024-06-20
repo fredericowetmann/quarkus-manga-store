@@ -1,6 +1,7 @@
 package br.unitins.topicos2.resource;
 
 import br.unitins.topicos2.dto.UserDTO;
+import br.unitins.topicos2.model.Profile;
 import br.unitins.topicos2.service.UserService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
@@ -72,6 +73,13 @@ public class UserResource {
     @RolesAllowed({"Admin"})
     public Response findByName(@PathParam("name") String name) {
         return Response.ok(service.findByName(name)).build();
+    }
+
+    @GET
+    @Path("/profiles")
+    @RolesAllowed({"Admin"})
+    public Response findProfile(){
+        return Response.ok(Profile.values()).build();
     }
 
     @GET

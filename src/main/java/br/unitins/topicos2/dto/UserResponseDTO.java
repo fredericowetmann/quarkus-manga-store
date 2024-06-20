@@ -9,7 +9,8 @@ public record UserResponseDTO(
     String email,
     String cpf,
     Profile profile,
-    String imageName
+    String imageName,
+    AddressResponseDTO address
 ) { 
     public static UserResponseDTO valueOf(User user){
 
@@ -19,7 +20,8 @@ public record UserResponseDTO(
             user.getEmail(),
             user.getCpf(),
             user.getProfile(),
-            user.getImageName()
+            user.getImageName(),
+            AddressResponseDTO.valueOf(user.getAddress())
         );
     }
 }

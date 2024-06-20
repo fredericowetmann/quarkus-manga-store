@@ -15,11 +15,6 @@
         - password: String
     }
 
-    class Phone{
-        - areaCode: String
-        - number: String
-    }
-
     class Author{
         - name: String
     }
@@ -117,7 +112,6 @@
     Manga "1" --> "*" Genre
     Manga "1" --> Collection
 
-    User "1" *--> "*" Phone
     User "1" *--> "*" Address
     User "1" --> "1" UserType
 

@@ -6,7 +6,8 @@ import jakarta.ws.rs.FormParam;
 
 public class CollectionImageForm {
 
-    @FormParam("idCollection")
+    @FormParam("id")
+    @PartType("text/plain")
     private Long id;
 
     @FormParam("imageName")
@@ -39,6 +40,5 @@ public class CollectionImageForm {
     public void setId(Long id) {
         this.id = id;
     }
-
     
 }

@@ -96,7 +96,6 @@ public class GenreResource {
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({ "User", "Admin"})
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando por genero de id %s", id);

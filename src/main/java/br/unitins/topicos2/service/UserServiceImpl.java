@@ -9,8 +9,10 @@ import br.unitins.topicos2.dto.UserBasicDTO;
 import br.unitins.topicos2.dto.UserBasicResponseDTO;
 import br.unitins.topicos2.dto.UserDTO;
 import br.unitins.topicos2.dto.UserResponseDTO;
+import br.unitins.topicos2.model.Address;
 import br.unitins.topicos2.model.Profile;
 import br.unitins.topicos2.model.User;
+import br.unitins.topicos2.repository.CityRepository;
 import br.unitins.topicos2.repository.UserRepository;
 import br.unitins.topicos2.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -24,6 +26,9 @@ public class UserServiceImpl implements UserService {
 
     @Inject
     UserRepository repository;
+
+    @Inject
+    CityRepository cityRepository;
 
     @Inject
     HashService hashService;
@@ -42,6 +47,15 @@ public class UserServiceImpl implements UserService {
         novoUser.setCpf(dto.cpf());
         novoUser.setPassword(hashService.getHashPassword(dto.password()));
         novoUser.setProfile(Profile.valueOf(dto.idProfile()));
+
+        Address end = new Address();
+        end.setName(dto.address().name());
+        end.setPostalCode(dto.address().postalCode());
+        end.setAddress(dto.address().address());
+        end.setComplement(dto.address().complement());
+        end.setCity(cityRepository.findById(dto.address().city()));
+
+        novoUser.setAddress(end);
 
         repository.persist(novoUser);
 
@@ -70,6 +84,15 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(hashService.getHashPassword(dto.password()));
         newUser.setProfile(Profile.valueOf(1));
 
+        Address end = new Address();
+        end.setName("");
+        end.setPostalCode("");
+        end.setAddress("");
+        end.setComplement("");
+        end.setCity(null);
+
+        newUser.setAddress(end);
+
         repository.persist(newUser);
 
         return UserBasicResponseDTO.valueOf(newUser);
@@ -83,6 +106,14 @@ public class UserServiceImpl implements UserService {
         user.setName(dto.name());
         user.setPassword(dto.password());
         user.setCpf(dto.cpf());
+
+        Address end = new Address();
+        end.setName(dto.address().name());
+        end.setPostalCode(dto.address().postalCode());
+        end.setAddress(dto.address().address());
+        end.setComplement(dto.address().complement());
+
+        user.setAddress(end);
 
         return UserResponseDTO.valueOf(user);
     }
@@ -115,7 +146,7 @@ public class UserServiceImpl implements UserService {
         String currentHashedPassword = hashService.getHashPassword(updatePasswordDTO.oldPassword());
 
         if (!currentHashedPassword.equals(user.getPassword())) {
-            throw new RuntimeException("Senha antiga está incorreta!");
+            throw new ValidationException("Senha", "Senha incorreta");
         }
 
         String newHashedPassword = hashService.getHashPassword(updatePasswordDTO.newPassword());

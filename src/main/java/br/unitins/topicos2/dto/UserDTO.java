@@ -11,7 +11,8 @@ public record UserDTO (
     String password,
     @NotBlank(message = "O campo tem que ser informado.")
     String cpf,
-    Integer idProfile
+    Integer idProfile,
+    AddressDTO address
 ) {
 
 }

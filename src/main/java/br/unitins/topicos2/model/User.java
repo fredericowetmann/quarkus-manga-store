@@ -1,6 +1,10 @@
 package br.unitins.topicos2.model;
 
+import jakarta.annotation.Nullable;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -11,8 +15,14 @@ public class User extends DefaultEntity {
     private String email;
     private String password;
     private String cpf;
+
     //@Enumerated(EnumType.ORDINAL)
     private Profile profile;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @Nullable
+    @JoinColumn(name = "id_address", nullable = true)
+    private Address address;
 
     private String imageName;
 
@@ -63,5 +73,13 @@ public class User extends DefaultEntity {
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }
-    
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
 }

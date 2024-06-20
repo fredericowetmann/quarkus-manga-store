@@ -12,6 +12,8 @@ import br.unitins.topicos2.dto.UserResponseDTO;
 import br.unitins.topicos2.model.ItemOrder;
 import br.unitins.topicos2.model.Manga;
 import br.unitins.topicos2.model.Order;
+import br.unitins.topicos2.model.Payment;
+import br.unitins.topicos2.model.PaymentStatus;
 import br.unitins.topicos2.model.User;
 import br.unitins.topicos2.repository.MangaRepository;
 import br.unitins.topicos2.repository.OrderRepository;
@@ -47,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderResponseDTO insert(OrderDTO dto, String email) {
 
-        if(dto.itens().isEmpty() || dto == null || dto.itens() == null){
+        if (dto.itens().isEmpty() || dto == null || dto.itens() == null) {
             throw new ValidationException("400", "Não há produtos na compra");
         }
         User user = userRepository.findByEmail(email);
@@ -64,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
 
         pedido.setItens(new ArrayList<ItemOrder>());
         for (ItemOrderDTO itemDto : dto.itens()) {
-            if(itemDto.quantity() > mangaService.findById(itemDto.idManga()).inventory()) {
+            if (itemDto.quantity() > mangaService.findById(itemDto.idManga()).inventory()) {
                 throw new ValidationException("400", "Estoque insuficiente");
             }
             ItemOrder item = new ItemOrder();
@@ -79,13 +81,30 @@ public class OrderServiceImpl implements OrderService {
             pedido.getItens().add(item);
         }
 
-        //pedido.setPayment(new Payment(total));
+        if (dto.payment() != null) {
+            Payment payment = new Payment();
+            payment.setCardNumber(dto.payment().cardNumber());
+            payment.setCardHolderName(dto.payment().cardHolderName());
+            payment.setCardExpiration(dto.payment().cardExpiration());
+            payment.setCardCvv(dto.payment().cardCvv());
+            payment.setAmount(total);
+            payment.setOrder(pedido);
+            pedido.setPayment(payment);
+
+            // Aqui você pode adicionar a lógica para processar o pagamento
+            // e definir o status do pagamento com base no resultado do processamento.
+            // Vamos supor que o pagamento foi processado com sucesso.
+            pedido.setPaymentStatus(PaymentStatus.COMPLETED);
+        } else {
+            pedido.setPaymentStatus(PaymentStatus.PENDING);
+            //throw new ValidationException("400", "Detalhes de pagamento não fornecidos");
+        }
 
         pedido.setUser(user);
 
         orderRepository.persist(pedido);
 
-        return OrderResponseDTO.valueOf(pedido); 
+        return OrderResponseDTO.valueOf(pedido);
     }
     
 

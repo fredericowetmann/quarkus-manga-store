@@ -71,18 +71,15 @@ public class UserLogadoResource {
     }
 
     @PATCH
-    @Path("/image/upload")
+    @Path("/image/upload/")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @RolesAllowed({"User", "Admin"})
     public Response salvarImagem(@MultipartForm MangaImageForm form) {
-        UserResponseDTO userDTO = userService.findById(form.getId());
-
         LOG.info("nome imagem: "+form.getImageName());
         System.out.println("nome imagem: "+form.getImageName());
         
         fileService.save(form.getId(), form.getImageName(), form.getImage());
-        userDTO = userService.updateImageName(userDTO.id(), form.getImageName());
-        LOG.info("Imagem alterada");
-        return Response.ok(userDTO).build();
+        return Response.noContent().build();
     }
 
     @GET

@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "address_table")
 public class Address extends DefaultEntity {
+    
     private String name;
     private String postalCode;
     private String address;

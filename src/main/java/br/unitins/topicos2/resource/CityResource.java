@@ -67,7 +67,7 @@ public class CityResource {
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"User", "Admin"})
     public Response findById(@PathParam("id") Long id) {
         return Response.ok(service.findById(id)).build();
     }

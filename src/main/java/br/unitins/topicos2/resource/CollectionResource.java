@@ -89,7 +89,7 @@ public class CollectionResource {
     }
 
     @PATCH
-    @Path("/image/upload")
+    @Path("/image/upload/")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response salvarImagem(@MultipartForm MangaImageForm form) {
         LOG.info("nome imagem: "+form.getImageName());
@@ -125,7 +125,6 @@ public class CollectionResource {
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({"Admin"})
     public Response findById(@PathParam("id") Long id){
         try{
             LOG.infof("Buscando por coleção de id %s", id);
