@@ -13,7 +13,8 @@ public record OrderResponseDTO(
     Double totalOrder,
     List<ItemOrderResponseDTO> itens,
     PaymentResponseDTO payment,
-    PaymentStatus paymentStatus
+    PaymentStatus paymentStatus,
+    AddressResponseDTO address
 ) { 
     public static OrderResponseDTO valueOf(Order order){
         return new OrderResponseDTO(
@@ -23,7 +24,8 @@ public record OrderResponseDTO(
             order.getTotalOrder(),
             ItemOrderResponseDTO.valueOf(order.getItens()),
             PaymentResponseDTO.valueOf(order.getPayment()),
-            order.getPaymentStatus()
+            order.getPaymentStatus(),
+            AddressResponseDTO.valueOf(order.getAddress())
         );
     }
 }

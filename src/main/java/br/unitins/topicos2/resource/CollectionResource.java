@@ -1,7 +1,7 @@
 package br.unitins.topicos2.resource;
 
 import br.unitins.topicos2.dto.CollectionDTO;
-import br.unitins.topicos2.form.MangaImageForm;
+import br.unitins.topicos2.form.CollectionImageForm;
 import br.unitins.topicos2.service.CollectionFileService;
 import br.unitins.topicos2.service.CollectionService;
 import jakarta.annotation.security.RolesAllowed;
@@ -91,7 +91,7 @@ public class CollectionResource {
     @PATCH
     @Path("/image/upload/")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response salvarImagem(@MultipartForm MangaImageForm form) {
+    public Response salvarImagem(@MultipartForm CollectionImageForm form) {
         LOG.info("nome imagem: "+form.getImageName());
         System.out.println("nome imagem: "+form.getImageName());
         

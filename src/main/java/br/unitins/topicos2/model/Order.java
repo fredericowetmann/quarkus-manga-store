@@ -38,6 +38,10 @@ public class Order extends DefaultEntity {
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_address")
+    private Address address;
+
     // Getters and Setters
     public Date getDataHora() {
         return dataHora;
@@ -86,5 +90,13 @@ public class Order extends DefaultEntity {
     public void setPaymentStatus(PaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
-    
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
 }

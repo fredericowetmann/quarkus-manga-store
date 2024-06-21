@@ -5,8 +5,8 @@ import java.util.List;
 
 public record OrderDTO (
     PaymentDTO payment,
-    // EnderecoDTO endereco,
-    List<ItemOrderDTO> itens
+    List<ItemOrderDTO> itens,
+    AddressDTO address
 ) {
 
 } 

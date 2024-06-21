@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import br.unitins.topicos2.dto.GenreResponseDTO;
 import br.unitins.topicos2.dto.ItemOrderDTO;
 import br.unitins.topicos2.dto.OrderDTO;
 import br.unitins.topicos2.dto.OrderResponseDTO;
-import br.unitins.topicos2.dto.UserResponseDTO;
+import br.unitins.topicos2.model.Address;
+import br.unitins.topicos2.model.City;
 import br.unitins.topicos2.model.ItemOrder;
 import br.unitins.topicos2.model.Manga;
 import br.unitins.topicos2.model.Order;
 import br.unitins.topicos2.model.Payment;
 import br.unitins.topicos2.model.PaymentStatus;
 import br.unitins.topicos2.model.User;
+import br.unitins.topicos2.repository.CityRepository;
 import br.unitins.topicos2.repository.MangaRepository;
 import br.unitins.topicos2.repository.OrderRepository;
 import br.unitins.topicos2.repository.UserRepository;
@@ -39,11 +40,8 @@ public class OrderServiceImpl implements OrderService {
     @Inject
     OrderRepository orderRepository;
 
-    // @Inject
-    // PixRepository pixRepository;
-
-    // @Inject
-    // CreditCardRepository creditCardRepository;
+    @Inject
+    CityRepository cityRepository;
 
     @Override
     @Transactional
@@ -100,83 +98,25 @@ public class OrderServiceImpl implements OrderService {
             //throw new ValidationException("400", "Detalhes de pagamento não fornecidos");
         }
 
+        if (dto.address() != null) {
+            Address address = new Address();
+            address.setName(dto.address().name());
+            address.setPostalCode(dto.address().postalCode());
+            address.setAddress(dto.address().address());
+            address.setComplement(dto.address().complement());
+            City city = cityRepository.findById(dto.address().city());
+            address.setCity(city);
+            pedido.setAddress(address);
+        } else {
+            throw new ValidationException("400", "Endereço de entrega não fornecido");
+        }
+
         pedido.setUser(user);
 
         orderRepository.persist(pedido);
 
         return OrderResponseDTO.valueOf(pedido);
     }
-    
-
-    // @Override
-    // public void finishPayment(Long idOrder) throws NullPointerException {
-
-    //     Order order = orderRepository.findById(idOrder);
-
-    //     order.setDataCompra(LocalDateTime.now());
-
-    //     // order.setAdress(order.getUser().getAddresses());
-
-    //     order.setIfConcluida(true);
-    // }
-
-    // @Override
-    // @Transactional
-    // public void payUsingPix(String email) {
-    //     User user = userRepository.findByEmail(email);
-
-        
-    //     Order order = validar(user);
-
-    //     Pix payment = new Pix(order.getTotalOrder(), order.getUser().getName(), order.getUser().getCpf());
-
-    //     pixRepository.persist(payment);
-
-    //     order.setPayment(payment);
-
-    //     if (order.getPayment() == null)
-    //         throw new NullPointerException("Não foi efetuado nenhum pagamento");
-
-    //     order.getPayment().setConfirmationPayment(true);
-    //     order.setIfFinished(true);
-    // }
-
-    // @Override
-    // @Transactional
-    // public void payUsingCreditCard(String email, CreditCardDTO creditCardDTO) {
-    //     User user = userRepository.findByEmail(email);
-
-    //     Order order = validar(user);
-
-    //     CreditCard payment = new CreditCard(order.getTotalOrder(),
-    //                                         creditCardDTO.cardNumber(),
-    //                                         creditCardDTO.impressedCardName(),
-    //                                         user.getCpf(),
-    //                                         CardBrand.valueOf(creditCardDTO.cardBrand()));
-        
-    //     creditCardRepository.persist(payment);
-
-    //     order.setPayment(payment);
-
-    //     if (order.getPayment() == null)
-    //         throw new NullPointerException("Não foi efetuado nenhum pagamento");
-
-    //     order.getPayment().setConfirmationPayment(true);
-    //     order.setIfFinished(true);
-    // }
-
-    // private Order validar(User user) throws NullPointerException {
-
-    //     Order order = orderRepository.findByUserWhereIsNotFinished(user);
-
-    //     if (order == null)
-    //         throw new NullPointerException("Não há nenhuma compra em andamento");
-
-    //     if (order.getItens().size() == 0)
-    //         throw new NullPointerException("Não há nenhum item no pedido");
-
-    //     return order;
-    // }
 
     @Override
     public OrderResponseDTO findByOrderId(Long id) {

@@ -4,7 +4,7 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
-import br.unitins.topicos2.form.MangaImageForm;
+import br.unitins.topicos2.form.UserImageForm;
 import br.unitins.topicos2.service.UserFileService;
 import br.unitins.topicos2.service.UserService;
 import br.unitins.topicos2.dto.UpdatePasswordDTO;
@@ -71,10 +71,10 @@ public class UserLogadoResource {
     }
 
     @PATCH
-    @Path("/image/upload/")
+    @Path("/image/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @RolesAllowed({"User", "Admin"})
-    public Response salvarImagem(@MultipartForm MangaImageForm form) {
+    public Response salvarImagem(@MultipartForm UserImageForm form) {
         LOG.info("nome imagem: "+form.getImageName());
         System.out.println("nome imagem: "+form.getImageName());
         
